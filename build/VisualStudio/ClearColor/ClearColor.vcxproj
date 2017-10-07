@@ -18,6 +18,9 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\main.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{2030F6F0-4DDC-4D43-B690-EF648DAD89C5}</ProjectGuid>
@@ -70,28 +73,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Projects\Kidsnow\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Projects\Kidsnow\lib\Windows\x86;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)..\..\..\bin\$(Platform)\$(Configuration)</OutDir>
-    <IntDir>$(SolutionDir)..\..\..\bin\obj\$(Platform)\$(Configuration)</IntDir>
+    <IncludePath>$(SolutionDir)..\..\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\..\lib\Windows\x86;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)..\..\bin\$(Platform)\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\obj\$(Platform)\$(Configuration)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Projects\Kidsnow\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Projects\Kidsnow\lib\Windows\x86;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)..\..\..\bin\$(Platform)\$(Configuration)</OutDir>
-    <IntDir>$(SolutionDir)..\..\..\bin\obj\$(Platform)\$(Configuration)</IntDir>
+    <IncludePath>$(SolutionDir)..\..\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\..\lib\Windows\x86;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)..\..\bin\$(Platform)\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\obj\$(Platform)\$(Configuration)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Projects\Kidsnow\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Projects\Kidsnow\lib\Windows\x64;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)..\..\..\bin\$(Platform)\$(Configuration)</OutDir>
-    <IntDir>$(SolutionDir)..\..\..\bin\obj\$(Platform)\$(Configuration)</IntDir>
+    <IncludePath>$(SolutionDir)..\..\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\..\lib\Windows\x64;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)..\..\bin\$(Platform)\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\obj\$(Platform)\$(Configuration)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Projects\Kidsnow\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Projects\Kidsnow\lib\Windows\x64;$(LibraryPath)</LibraryPath>
-    <OutDir>$(SolutionDir)..\..\..\bin\$(Platform)\$(Configuration)</OutDir>
-    <IntDir>$(SolutionDir)..\..\..\bin\obj\$(Platform)\$(Configuration)</IntDir>
+    <IncludePath>$(SolutionDir)..\..\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\..\lib\Windows\x64;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)..\..\bin\$(Platform)\$(Configuration)</OutDir>
+    <IntDir>$(SolutionDir)..\..\bin\obj\$(Platform)\$(Configuration)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -141,9 +144,6 @@
       <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\src\main.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
