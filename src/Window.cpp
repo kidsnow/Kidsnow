@@ -1,45 +1,52 @@
 #include "Window.h"
+#include "log.h"
 
 namespace kidsnow {
 
-Window::Window(std::string windowName)
-{
-    m_windowName = windowName;
-}
-
-Window::~Window()
-{
-
-}
-    
-int Window::Initialize()
-{
-    if (!glfwInit)
-        return -1;
-
-    window = glfwCreateWindow(640, 480, m_windowName, NULL, NULL);
-    if (!window)
+    Window::Window(std::string windowName, int width, int height)
     {
-        glfwTerminate();
-        return -1;
+        m_windowName = windowName;
+        m_width = width;
+        m_height = height;
     }
 
-    glfwMakeContextCurrent(window);
-
-    while (!glfwWindowShouldClose(window))
+    Window::~Window()
     {
-        glClearColor(0.0, 1.0, 0.0, 1.0);
-        glClear(GL_COLOR_BUFFER_BIT);
 
-        glfwSwapBuffers(window);
+    }
 
+    bool Window::Initialize()
+    {
+        m_window = glfwCreateWindow(m_width, m_height, m_windowName.c_str(), NULL, NULL);
+        if (!m_window)
+        {
+            LogDebug("Failed to create GLFW window.");
+            return false;
+        }
+
+        glfwMakeContextCurrent(m_window);
+
+        Greetings();
+
+        return true;
+    }
+
+    void Window::Greetings()
+    {
+        printf (ANSI_COLOR_CYAN);
+        printf("******************************************************************\n");
+        printf("    OpenGL Framework by Kidsnow\n");
+        printf("    OpenGL Version: %s\n", glGetString(GL_VERSION));
+        printf("    GLFW Version: %s\n", glfwGetVersionString());
+        //printf("    GLEW Version: %s\n", glewGetString(GLEW_VERSION));
+        printf("******************************************************************\n");
+        printf (ANSI_COLOR_RESET);
+    }
+
+    void Window::Update()
+    {
+        glfwSwapBuffers(m_window);
         glfwPollEvents();
     }
-
-    glfwTerminate();
-
-    return 0;
-
-}
 
 }

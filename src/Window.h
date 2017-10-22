@@ -1,27 +1,33 @@
 #pragma once
 
-#include <iostream>
 #include <GLFW/glfw3.h>
+#include <string>
 
-namespace Kidsnow {
+namespace kidsnow {
 
-/*
- * I wanna hide any GLFW-dependent logic into class Window.
- */
-class Window {
-public:
-    Window(std::string windowName);
-    ~Window();
+    class Window {
+        public:
+            Window(std::string windowName, int width, int height);
+            ~Window();
 
-public:
-    void Initialize();
-    inline bool Closed() { return glfwWindowShouldClose(m_window); }
-    inline bool m_window->Update();
+        public:
+            bool Initialize();
+            void Update();
+            inline bool Finalize() { return glfwWindowShouldClose(m_window); }
 
+        public:
+            bool isKeyPressed(unsigned int keycode) const;
+            bool isMouseBtnPressed(unsigned int button) const;
+            void getMousePosition(double& x, double& y) const;
 
-private:
-    GLFWwindow* m_window;
-    std::string m_windowName;
-};
+        private:
+            void Greetings();
+
+        private:
+            GLFWwindow* m_window;
+            std::string m_windowName;
+            int m_width;
+            int m_height;
+    };
 
 }

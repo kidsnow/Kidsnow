@@ -1,6 +1,8 @@
 project(KIDSNOW_ENGINE)
 cmake_minimum_required(VERSION 3.9)
 
+add_definitions(-D_DEBUG)
+
 set(PROJECT_DIR ${CMAKE_SOURCE_DIR}/../..)
 
 if (APPLE)
@@ -17,5 +19,6 @@ endif()
 include_directories(${PROJECT_DIR}/include)
 link_directories(${PROJECT_DIR}/lib/Mac)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_DIR}/bin)
-add_executable(clear_color ${PROJECT_DIR}/src/main.cpp)
+file(GLOB SOURCES ${PROJECT_DIR}/src/*.cpp)
+add_executable(clear_color ${SOURCES})
 target_link_libraries(clear_color glfw3 ${FRAMEWORK_LIST})
