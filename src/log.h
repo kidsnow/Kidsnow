@@ -2,8 +2,6 @@
 
 #include <iostream>
 
-#ifdef _DEBUG
-
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
 #define ANSI_COLOR_YELLOW  "\x1b[33m"
@@ -12,19 +10,25 @@
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
+#ifdef _DEBUG
+
 #define LogDebug(...) \
-    { printf (ANSI_COLOR_RED); \
-    printf ("%s:%d\n", __FILE__, __LINE__); \
-    printf ("\tKidsnow: " __VA_ARGS__ ); \
-    printf (ANSI_COLOR_RESET); \
-    printf ("\n") }
+  {                                             \
+      printf (ANSI_COLOR_RED);                  \
+      printf ("%s:%d\n", __FILE__, __LINE__);   \
+      printf ("\tKidsnow: " __VA_ARGS__ );      \
+      printf (ANSI_COLOR_RESET);                \
+      printf ("\n");                            \
+  }
 
 #else
 #define LogDebug(...)
 #endif
 
 #define LogInfo(...) \
-    { printf (ANSI_COLOR_CYAN); \
-    printf ("Kidsnow: " __VA_ARGS__); \
-    printf (ANSI_COLOR_RESET); \
-    printf ("\n") }
+  {                                     \
+    printf (ANSI_COLOR_CYAN);           \
+    printf ("Kidsnow: " __VA_ARGS__);   \
+    printf (ANSI_COLOR_RESET);          \
+    printf ("\n");                      \
+  }
