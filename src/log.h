@@ -13,18 +13,18 @@
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
 #define LogDebug(...) \
-    printf (ANSI_COLOR_RED); \
+    { printf (ANSI_COLOR_RED); \
     printf ("%s:%d\n", __FILE__, __LINE__); \
     printf ("\tKidsnow: " __VA_ARGS__ ); \
     printf (ANSI_COLOR_RESET); \
-    printf ("\n")
+    printf ("\n") }
 
 #else
 #define LogDebug(...)
 #endif
 
 #define LogInfo(...) \
-    printf (ANSI_COLOR_CYAN); \
+    { printf (ANSI_COLOR_CYAN); \
     printf ("Kidsnow: " __VA_ARGS__); \
     printf (ANSI_COLOR_RESET); \
-    printf ("\n")
+    printf ("\n") }
