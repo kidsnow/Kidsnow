@@ -17,6 +17,10 @@ namespace kidsnow {
 
     bool Window::Initialize()
     {
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
         m_window = glfwCreateWindow(m_width, m_height, m_windowName.c_str(), NULL, NULL);
         if (!m_window)
         {

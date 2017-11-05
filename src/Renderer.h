@@ -11,6 +11,7 @@ namespace kidsnow {
             ~Renderer();
 
         public:
+            GLchar* LoadShader();
             void Render();
 
         private:

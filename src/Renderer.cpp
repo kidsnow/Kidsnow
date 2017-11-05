@@ -12,6 +12,11 @@ namespace kidsnow {
 
     }
 
+    GLchar* Renderer::LoadShader()
+    {
+        return 0;
+    }
+
     void Renderer::Render()
     {
         glClearColor(0.0, 1.0, 0.0, 1.0);
