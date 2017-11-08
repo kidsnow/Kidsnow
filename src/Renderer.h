@@ -1,6 +1,7 @@
 #pragma once
 
 #include <GLFW/glfw3.h>
+#include <gl/GL.h>
 #include <glm/vec3.hpp>
 
 namespace kidsnow {

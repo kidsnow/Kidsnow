@@ -1,4 +1,5 @@
 #include "Application.h"
+#include <GLFW/glfw3.h>
 #include "log.h"
 
 namespace kidsnow {
