@@ -1,22 +1,26 @@
 #pragma once
 
 #include <GLFW/glfw3.h>
-#include <gl/GL.h>
-#include <glm/vec3.hpp>
 
 namespace kidsnow {
 
-    class Renderer {
-        public:
-            Renderer();
-            ~Renderer();
+typedef struct {
+    GLenum       type;
+    const char*  filename;
+    GLuint       shader;
+} ShaderInfo;
 
-        public:
-            GLchar* LoadShader();
-            void Render();
+class Renderer {
+public:
+    Renderer();
+    ~Renderer();
 
-        private:
+public:
+    void Render();
 
-    };
+public:
+    GLuint LoadShaders(ShaderInfo*);
 
-}
+};
+
+} // end of kidsnow
