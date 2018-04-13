@@ -28,6 +28,8 @@ bool Window::Initialize()
         return false;
     }
 
+    //glfwSetKeyCallback(m_window, key_callback);
+
     glfwMakeContextCurrent(m_window);
 
     Greetings();
@@ -51,6 +53,10 @@ void Window::Update()
 {
     glfwSwapBuffers(m_window);
     glfwPollEvents();
+}
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
 }
 
 } // end of kidsnow

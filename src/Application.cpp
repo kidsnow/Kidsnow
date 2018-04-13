@@ -28,6 +28,7 @@ bool Application::Initialize()
 
     if (!(m_window->Initialize()))
     {
+        LogInfo("Finalizing Application");
         glfwTerminate();
         return false;
     }

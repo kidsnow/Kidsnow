@@ -1,6 +1,8 @@
 #pragma once
 
+#ifdef WINDOWS
 #include <GL/glew.h>
+#endif
 #include <GLFW/glfw3.h>
 
 namespace kidsnow {

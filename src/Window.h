@@ -1,6 +1,8 @@
 #pragma once
 
+#ifdef WINDOWS
 #include <GL/glew.h>
+#endif
 #include <GLFW/glfw3.h>
 #include <string>
 
@@ -31,4 +33,6 @@ private:
     int m_height;
 };
 
-} // end of kidsnow
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
+} // end of kidsnoaw
