@@ -37,14 +37,14 @@ bool Window::Initialize()
 
 void Window::Greetings()
 {
-    printf (ANSI_COLOR_CYAN);
-    printf("******************************************************************\n");
-    printf("    OpenGL Framework by Kidsnow\n");
-    printf("    OpenGL Version: %s\n", glGetString(GL_VERSION));
-    printf("    GLFW Version: %s\n", glfwGetVersionString());
+    std::cout << ANSI_COLOR_CYAN;
+    std::cout << "******************************************************************\n";
+    std::cout << "    OpenGL Framework by Kidsnow\n";
+    std::cout << "    OpenGL Version: %s\n", glGetString(GL_VERSION);
+    std::cout << "    GLFW Version: %s\n", glfwGetVersionString();
     //printf("    GLEW Version: %s\n", glewGetString(GLEW_VERSION));
-    printf("******************************************************************\n");
-    printf (ANSI_COLOR_RESET);
+    std::cout << "******************************************************************\n";
+    std::cout << ANSI_COLOR_RESET;
 }
 
 void Window::Update()
