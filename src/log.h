@@ -12,23 +12,21 @@
 
 #ifdef _DEBUG
 
-#define LogDebug(...) \
-  {                                             \
-      printf (ANSI_COLOR_RED);                  \
-      printf ("%s:%d\n", __FILE__, __LINE__);   \
-      printf ("\tKidsnow: " __VA_ARGS__ );      \
-      printf (ANSI_COLOR_RESET);                \
-      printf ("\n");                            \
+#define LogDebug(...)								\
+  {													\
+      std::cout << ANSI_COLOR_RED;					\
+      std::cout << "%s:%d\n", __FILE__, __LINE__;	\
+      std::cout << "\tKidsnow: " __VA_ARGS__ ;		\
+      std::cout << ANSI_COLOR_RESET << std::endl;	\
   }
 
 #else
 #define LogDebug(...)
 #endif
 
-#define LogInfo(...) \
-  {                                     \
-    printf (ANSI_COLOR_CYAN);           \
-    printf ("Kidsnow: " __VA_ARGS__);   \
-    printf (ANSI_COLOR_RESET);          \
-    printf ("\n");                      \
+#define LogInfo(...)								\
+  {													\
+    std::cout << ANSI_COLOR_CYAN;					\
+    std::cout << "Kidsnow: " __VA_ARGS__;			\
+    std::cout << ANSI_COLOR_RESET << std::endl;		\
   }
