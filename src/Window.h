@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef WINDOWS
+#ifdef _WIN32
 #include <GL/glew.h>
 #endif
 #include <GLFW/glfw3.h>
@@ -16,7 +16,7 @@ public:
 public:
     bool Initialize();
     void Update();
-    inline bool Finalize() { return glfwWindowShouldClose(m_window); }
+	bool Finalize();
 
 public:
     bool isKeyPressed(unsigned int keycode) const;
@@ -32,7 +32,5 @@ private:
     int m_width;
     int m_height;
 };
-
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 } // end of kidsnoaw

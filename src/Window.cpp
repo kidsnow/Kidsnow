@@ -17,6 +17,12 @@ Window::~Window()
 
 bool Window::Initialize()
 {
+	if (!glfwInit())
+	{
+		LogDebug("GLFW initialize failed!");
+		return false;
+	}
+
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -25,10 +31,9 @@ bool Window::Initialize()
     if (!m_window)
     {
         LogDebug("Failed to create GLFW window.");
+		glfwTerminate();
         return false;
     }
-
-    //glfwSetKeyCallback(m_window, key_callback);
 
     glfwMakeContextCurrent(m_window);
 
@@ -39,14 +44,20 @@ bool Window::Initialize()
 
 void Window::Greetings()
 {
+#ifndef _WIN32
     std::cout << ANSI_COLOR_CYAN;
+#endif
     std::cout << "******************************************************************\n";
     std::cout << "    OpenGL Framework by Kidsnow\n";
-    std::cout << "    OpenGL Version: %s\n", glGetString(GL_VERSION);
-    std::cout << "    GLFW Version: %s\n", glfwGetVersionString();
-    //printf("    GLEW Version: %s\n", glewGetString(GLEW_VERSION));
+    std::cout << "    OpenGL Version: " << glGetString(GL_VERSION) << "\n";
+    std::cout << "    GLFW Version: " << glfwGetVersionString() << "\n";
+#ifdef _WIN32
+	std::cout << "    GLEW Version: " << glewGetString(GLEW_VERSION) << "\n";
+#endif
     std::cout << "******************************************************************\n";
+#ifndef _WIN32
     std::cout << ANSI_COLOR_RESET;
+#endif
 }
 
 void Window::Update()
@@ -55,8 +66,16 @@ void Window::Update()
     glfwPollEvents();
 }
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+bool Window::Finalize()
 {
+	if (glfwWindowShouldClose(m_window))
+	{
+		glfwDestroyWindow(m_window);
+		glfwTerminate();
+		return true;
+	}
+
+	return false;
 }
 
 } // end of kidsnow

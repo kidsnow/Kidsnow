@@ -13,6 +13,11 @@ Renderer::~Renderer()
 
 }
 
+bool Renderer::Initialize()
+{
+	return true;
+}
+
 void Renderer::Render()
 {
     glClearColor(0.0, 1.0, 0.0, 1.0);

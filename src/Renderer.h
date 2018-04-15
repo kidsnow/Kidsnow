@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef WINDOWS
+#ifdef _WIN32
 #include <GL/glew.h>
 #endif
 #include <GLFW/glfw3.h>
@@ -19,6 +19,7 @@ public:
     ~Renderer();
 
 public:
+	bool Initialize();
     void Render();
 
 public:

@@ -10,13 +10,36 @@
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
+#ifdef _WIN32
+
+#ifdef _DEBUG
+
+#define LogDebug(...)								\
+  {													\
+      std::cout << __FILE__ << ":" << __LINE__;		\
+      std::cout << "\tKidsnow: " << __VA_ARGS__ ;	\
+      std::cout << std::endl;						\
+  }
+
+#else
+#define LogDebug(...)
+#endif
+
+#define LogInfo(...)								\
+  {													\
+      std::cout << "\tKidsnow: " << __VA_ARGS__ ;	\
+      std::cout << std::endl;						\
+  }
+
+#else
+
 #ifdef _DEBUG
 
 #define LogDebug(...)								\
   {													\
       std::cout << ANSI_COLOR_RED;					\
-      std::cout << "%s:%d\n", __FILE__, __LINE__;	\
-      std::cout << "\tKidsnow: " __VA_ARGS__ ;		\
+      std::cout << __FILE__ << ":" << __LINE__;		\
+      std::cout << "\tKidsnow: " << __VA_ARGS__ ;	\
       std::cout << ANSI_COLOR_RESET << std::endl;	\
   }
 
@@ -26,7 +49,9 @@
 
 #define LogInfo(...)								\
   {													\
-    std::cout << ANSI_COLOR_CYAN;					\
-    std::cout << "Kidsnow: " __VA_ARGS__;			\
-    std::cout << ANSI_COLOR_RESET << std::endl;		\
+      std::cout << ANSI_COLOR_CYAN;					\
+      std::cout << "\tKidsnow: " << __VA_ARGS__ ;	\
+      std::cout << ANSI_COLOR_RESET << std::endl;	\
   }
+
+#endif

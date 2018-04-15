@@ -1,5 +1,4 @@
 #include "Application.h"
-#include <GLFW/glfw3.h>
 #include "log.h"
 
 namespace kidsnow {
@@ -13,25 +12,20 @@ Application::Application(std::string appName, int width, int height)
 
 Application::~Application()
 {
-    LogInfo("Finalizing application...");
-    glfwTerminate();
     LogInfo("Bye!");
 }
 
 bool Application::Initialize()
 {
-    if (!glfwInit())
-    {
-        LogDebug("GLFW initialize failed!");
-        return false;
-    }
-
     if (!(m_window->Initialize()))
     {
-        LogInfo("Finalizing Application");
-        glfwTerminate();
+        LogInfo("Init window failed.");
         return false;
     }
+	if (!(m_renderer->Initialize()))
+	{
+		LogInfo("Init renderer failed.");
+	}
 
     return true;
 }
