@@ -1,5 +1,7 @@
 # Kidsnow
-OpenGL 기반으로 아무거나 해보면서 놀려고 만든 프로젝트 입니다.
+Windows/Mac/Android platform에서 사용할 수 있는 OpenGL framework.  
 
-GLFW 3.2.1 버전과 GLM 0.9.8.5 버전을 사용하고 있습니다.
-일단 Windows와 Mac에서 개발하기 위해 GLFW를 활용해서 GL 초기화 진행.
+Application class, Input class는 platform independent하게 만들어 두고  
+Window class에서 platform dependent한 부분을 모두 해결한다.  
+
+추후에는 Renderer의 인터페이스도 backend independent하게 만들어서 OpenGL 뿐만 아니라 Vulkan 등 다양한 rendering API를 통해 구현할 예정.
