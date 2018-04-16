@@ -3,9 +3,13 @@
 int main(void)
 {
     kidsnow::Application* app = new kidsnow::Application("Hello", 640, 480);
-    app->Initialize();
+	
+	if (!app->Initialize())
+		return 0;
+
     app->Run();
-    delete app;
+    
+	delete app;
 
     return 0;
 }

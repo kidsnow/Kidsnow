@@ -51,9 +51,6 @@ void Window::Greetings()
     std::cout << "    OpenGL Framework by Kidsnow\n";
     std::cout << "    OpenGL Version: " << glGetString(GL_VERSION) << "\n";
     std::cout << "    GLFW Version: " << glfwGetVersionString() << "\n";
-#ifdef _WIN32
-	std::cout << "    GLEW Version: " << glewGetString(GLEW_VERSION) << "\n";
-#endif
     std::cout << "******************************************************************\n";
 #ifndef _WIN32
     std::cout << ANSI_COLOR_RESET;

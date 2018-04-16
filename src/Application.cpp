@@ -22,9 +22,10 @@ bool Application::Initialize()
         LogInfo("Init window failed.");
         return false;
     }
-	if (!(m_renderer->Initialize()))
+	if (!(m_renderer->Initialize(m_window->GetWidowWidth(), m_window->GetWidowHeight())))
 	{
 		LogInfo("Init renderer failed.");
+		return false;
 	}
 
     return true;

@@ -1,8 +1,10 @@
 #pragma once
 
 #include <string>
-#include "Window.h"
+/* Renderer.h includes glew on Windows platform and glew must be included before glfw. */
+/* Windows.h may include glfw so Renderer.h must be included before Window.h. */
 #include "Renderer.h"
+#include "Window.h"
 
 namespace kidsnow {
 

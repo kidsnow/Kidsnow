@@ -1,8 +1,5 @@
 #pragma once
 
-#ifdef _WIN32
-#include <GL/glew.h>
-#endif
 #include <GLFW/glfw3.h>
 #include <string>
 
@@ -19,9 +16,8 @@ public:
 	bool Finalize();
 
 public:
-    bool isKeyPressed(unsigned int keycode) const;
-    bool isMouseBtnPressed(unsigned int button) const;
-    void getMousePosition(double& x, double& y) const;
+	inline int GetWidowWidth() { return m_width; }
+	inline int GetWidowHeight() { return m_height; }
 
 private:
     void Greetings();
