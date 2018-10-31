@@ -44,6 +44,8 @@ bool Renderer::LoadWaveShaders()
 		return false;
 	m_locTextureMVPMatrix = glGetUniformLocation(m_textureShaderProgram, "u_ModelViewProjectionMatrix");
 	m_locScale = glGetUniformLocation(m_textureShaderProgram, "u_scale");
+
+	return true;
 }
 
 void Renderer::InitializeMatrices(int width, int height)
