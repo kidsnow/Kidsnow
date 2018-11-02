@@ -5,6 +5,8 @@
 
 namespace kidsnow {
 
+class Input;
+
 class Window {
 public:
     Window(std::string windowName, int width, int height);
@@ -12,7 +14,7 @@ public:
 
 public:
     bool Initialize();
-    void Update();
+    void Update(Input*);
 	bool Finalize();
 
 public:

@@ -1,5 +1,7 @@
-#include "Renderer.h"
-#include "log.h"
+#include "renderer.h"
+#include "helper.h"
+
+#include "shader.h"
 
 namespace kidsnow {
 
@@ -15,6 +17,7 @@ Renderer::~Renderer()
 
 bool Renderer::LoadWaveShaders()
 {
+
 	ShaderInfo shader_info[3] = {
 		{ GL_VERTEX_SHADER, "../../../src/resource/simple.vert" },
 		{ GL_FRAGMENT_SHADER, "../../../src/resource/simple.frag" },
@@ -100,8 +103,10 @@ bool Renderer::Initialize(int width, int height)
 	glClearColor(0.4f, 0.4f, 1.0f, 1.0f); // CYAN
 	glEnable(GL_DEPTH_TEST);
 
-	if (!LoadWaveShaders())
-		return false;
+	m_simpleShader = new Shader();
+	if (!m_simpleShader->Initialize("../../../src/resource/simple.vert", "../../../src/resource/simple.frag")) return false;
+	m_textureShader = new Shader();
+	if (!m_textureShader->Initialize("../../../src/resource/texture.vert", "../../../src/resource/texture.frag")) return false;
 
 	InitializeMatrices(width, height);
 

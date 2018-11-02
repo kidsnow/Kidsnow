@@ -1,5 +1,7 @@
-#include "Window.h"
-#include "log.h"
+#include "window.h"
+#include "helper.h"
+
+#include "input.h"
 
 namespace kidsnow {
 
@@ -57,7 +59,7 @@ void Window::Greetings()
 #endif
 }
 
-void Window::Update()
+void Window::Update(Input* input)
 {
     glfwSwapBuffers(m_window);
     glfwPollEvents();

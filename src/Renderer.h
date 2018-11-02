@@ -8,6 +8,8 @@
 
 namespace kidsnow {
 
+class Shader;
+
 typedef struct {
     GLenum       type;
     const char*  filename;
@@ -27,6 +29,8 @@ public:
     GLuint LoadShaders(ShaderInfo*);
 
 private:
+	Shader *m_simpleShader;
+	Shader *m_textureShader;
 	GLuint m_simpleShaderProgram, m_textureShaderProgram;
 	GLuint m_locSimpleMVPMatrix, m_locTextureMVPMatrix;
 	GLuint m_locPrimitiveColor, m_locScale;
