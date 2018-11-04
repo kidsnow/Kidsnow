@@ -22,26 +22,33 @@
     <ClCompile Include="..\..\..\src\application.cpp" />
     <ClCompile Include="..\..\..\src\input.cpp" />
     <ClCompile Include="..\..\..\src\main.cpp" />
+    <ClCompile Include="..\..\..\src\model.cpp" />
     <ClCompile Include="..\..\..\src\renderer.cpp" />
     <ClCompile Include="..\..\..\src\shader.cpp" />
+    <ClCompile Include="..\..\..\src\simpleshader.cpp" />
+    <ClCompile Include="..\..\..\src\textureshader.cpp" />
     <ClCompile Include="..\..\..\src\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\application.h" />
     <ClInclude Include="..\..\..\src\input.h" />
     <ClInclude Include="..\..\..\src\helper.h" />
+    <ClInclude Include="..\..\..\src\model.h" />
     <ClInclude Include="..\..\..\src\renderer.h" />
     <ClInclude Include="..\..\..\src\shader.h" />
+    <ClInclude Include="..\..\..\src\simpleshader.h" />
+    <ClInclude Include="..\..\..\src\textureshader.h" />
     <ClInclude Include="..\..\..\src\window.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\src\resource\test.vert" />
+    <None Include="..\..\..\src\resource\simple.frag" />
+    <None Include="..\..\..\src\resource\simple.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{2030F6F0-4DDC-4D43-B690-EF648DAD89C5}</ProjectGuid>
     <RootNamespace>ClearColor</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

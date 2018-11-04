@@ -12,9 +12,31 @@ Shader::~Shader()
 {
 }
 
+GLchar* Shader::ReadShader(const char* fileName) {
+	FILE* infile = fopen(fileName, "rb");
+
+	if (!infile) {
+		LogDebug("Unable to open file '%s'", fileName);
+		return NULL;
+	}
+
+	fseek(infile, 0, SEEK_END);
+	int len = ftell(infile);
+	fseek(infile, 0, SEEK_SET);
+
+	GLchar* source = (GLchar*)malloc((len + 1) * sizeof(GLchar));
+
+	fread(source, 1, len, infile);
+	fclose(infile);
+
+	source[len] = 0;
+
+	return source;
+}
+
 bool Shader::CompileShader(const char* shaderFileName, GLenum shaderType, GLuint& shader)
 {
-	GLuint shader = glCreateShader(GL_VERTEX_SHADER);
+	shader = glCreateShader(shaderType);
 	if (shader == NULL)
 	{
 		LogDebug("Failed to create shader object.");
@@ -37,6 +59,9 @@ bool Shader::CompileShader(const char* shaderFileName, GLenum shaderType, GLuint
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
 	if (!compiled)
 	{
+		GLsizei asdf;
+		GLchar* infoLog = new GLchar[10000];
+		glGetShaderInfoLog(shader, 10000, &asdf, infoLog);
 		glDeleteShader(shader);
 		return false;
 	}
@@ -44,24 +69,24 @@ bool Shader::CompileShader(const char* shaderFileName, GLenum shaderType, GLuint
 	return true;
 }
 
-bool Shader::Initialize(const char* vsFileName, const char* psFileName)
+bool Shader::Initialize(const char* vsFileName, const char* fsFileName)
 {
-	GLuint program = glCreateProgram();
-	if (program == NULL)
+	m_program = glCreateProgram();
+	if (m_program == NULL)
 	{
-		LogDebug("Failed to create program object.");
+		LogDebug("Failed to create m_program object.");
 		return false;
 	}
 
 	GLuint vertexShader, fragmentShader;
 	if (!CompileShader(vsFileName, GL_VERTEX_SHADER, vertexShader)) return false;
-	if (!CompileShader(psFileName, GL_FRAGMENT_SHADER, fragmentShader)) return false;
-	glAttachShader(program, vertexShader);
-	glAttachShader(program, fragmentShader);
+	if (!CompileShader(fsFileName, GL_FRAGMENT_SHADER, fragmentShader)) return false;
+	glAttachShader(m_program, vertexShader);
+	glAttachShader(m_program, fragmentShader);
 
-	glLinkProgram(program);
+	glLinkProgram(m_program);
 	GLint linked;
-	glGetProgramiv(program, GL_LINK_STATUS, &linked);
+	glGetProgramiv(m_program, GL_LINK_STATUS, &linked);
 	if (!linked)
 	{
 		glDeleteShader(vertexShader);
@@ -74,29 +99,7 @@ bool Shader::Initialize(const char* vsFileName, const char* psFileName)
 
 bool Shader::ShutDown()
 {
-
-}
-
-GLchar* Shader::ReadShader(const char* fileName) {
-	FILE* infile = fopen(fileName, "rb");
-
-	if (!infile) {
-		LogDebug("Unable to open file '%s'", fileName);
-		return NULL;
-	}
-
-	fseek(infile, 0, SEEK_END);
-	int len = ftell(infile);
-	fseek(infile, 0, SEEK_SET);
-
-	GLchar* source = (GLchar*)malloc((len + 1) * sizeof(GLchar));
-
-	fread(source, 1, len, infile);
-	fclose(infile);
-
-	source[len] = 0;
-
-	return source;
+	return true;
 }
 
 } // end of kidsnow

@@ -14,6 +14,7 @@ public:
 	Shader();
 	~Shader();
 
+public:
 	bool Initialize(const char*, const char*);
 	bool ShutDown();
 
@@ -21,7 +22,7 @@ private:
 	bool CompileShader(const char*, GLenum, GLuint&);
 	GLchar* Shader::ReadShader(const char*);
 
-private:
+protected:
 	GLuint m_program;
 };
 

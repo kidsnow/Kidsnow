@@ -8,7 +8,8 @@
 
 namespace kidsnow {
 
-class Shader;
+class SimpleShader;
+class Model;
 
 typedef struct {
     GLenum       type;
@@ -25,30 +26,9 @@ public:
 	bool Initialize(int width, int height);
     void Render();
 
-public:
-    GLuint LoadShaders(ShaderInfo*);
-
 private:
-	Shader *m_simpleShader;
-	Shader *m_textureShader;
-	GLuint m_simpleShaderProgram, m_textureShaderProgram;
-	GLuint m_locSimpleMVPMatrix, m_locTextureMVPMatrix;
-	GLuint m_locPrimitiveColor, m_locScale;
-
-	glm::mat4 m_simpleViewMatrix;
-	glm::mat4 m_simpleProjectionMatrix;
-	glm::mat4 m_simpleViewProjectionMatrix;
-
-	glm::mat4 m_textureViewMatrix;
-	glm::mat4 m_textureProjectionMatrix;
-	glm::mat4 m_textureViewProjectionMatrix;
-
-	GLuint m_axesVBO, m_axesVAO;
-
-private:
-	bool LoadWaveShaders();
-	void InitializeMatrices(int width, int height);
-	void LoadModels();
+	SimpleShader* m_simpleShader;
+	Model* m_model;
 
 private:
 	const float GRIDLENGTH = 100.0f;
