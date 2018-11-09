@@ -36,6 +36,7 @@ void SimpleShader::BeginScene()
 void SimpleShader::EndScene()
 {
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDisableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 

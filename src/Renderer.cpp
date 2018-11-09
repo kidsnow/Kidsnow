@@ -19,6 +19,7 @@ Renderer::~Renderer()
 
 bool Renderer::Initialize(int width, int height)
 {
+	//glewExperimental = true; // Needed for core profile
 	GLint result = glewInit();
 	if (GLEW_OK != result)
 	{
