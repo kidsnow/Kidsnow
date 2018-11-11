@@ -40,9 +40,8 @@ void Renderer::Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	m_simpleShader->BeginScene();
 	m_model->Render();
-	m_simpleShader->EndScene();
+	m_simpleShader->Render();
 }
 
 } // end of kidsnow

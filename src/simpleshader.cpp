@@ -27,17 +27,11 @@ bool SimpleShader::SetShaderParameters()
 	return true;
 }
 
-void SimpleShader::BeginScene()
+void SimpleShader::Render()
 {
 	glUseProgram(m_program);
 	SetShaderParameters();
-}
-
-void SimpleShader::EndScene()
-{
 	glDrawArrays(GL_TRIANGLES, 0, 3);
-	glDisableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 } // end of kidsnow

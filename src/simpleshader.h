@@ -11,8 +11,7 @@ public:
 	~SimpleShader();
 
 public:
-	void BeginScene();
-	void EndScene();
+	void Render();
 	bool Initialize(const char*, const char*);
 
 private:
