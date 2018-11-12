@@ -2,7 +2,7 @@
 
 namespace kidsnow {
 
-class GLContext;
+class Context;
 class Shader;
 class Model;
 
@@ -16,7 +16,7 @@ public:
     void Render();
 
 private:
-	GLContext* m_context;
+	Context* m_context;
 	Shader* m_simpleShader;
 	Model* m_model;
 

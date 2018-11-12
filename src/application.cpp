@@ -2,7 +2,7 @@
 #include "logger.h"
 
 #include "renderer.h"
-#include "window.h"
+#include "tos_window.h"
 #include "input.h"
 
 namespace kidsnow {
@@ -10,7 +10,7 @@ namespace kidsnow {
 Application::Application(std::string appName, int width, int height)
 {
     m_appName = appName;
-    m_window = new Window(m_appName, width, height);
+    m_window = new TOSWindow(m_appName, width, height);
     m_renderer = new Renderer();
 	m_input = new Input();
 }

@@ -1,17 +1,17 @@
 #pragma once
 
-#include "graphics.h"
+#include "context.h"
 
 namespace kidsnow {
 
-class GLContext {
+class GLContext : public Context {
 public:
 	GLContext();
 	~GLContext();
 
 public:
-	bool Initialize();
-	void Render();
+	virtual bool Initialize();
+	virtual void Render();
 };
 
 } // end of kidsnow
