@@ -1,10 +1,6 @@
 #pragma once
 
-#ifdef _WIN32
-#include <GL/glew.h>
-#endif
-#include <GLFW/glfw3.h>
-#include <glm/gtc/matrix_transform.hpp>
+#include "graphics.h"
 
 namespace kidsnow {
 
@@ -17,10 +13,6 @@ public:
 public:
 	bool Initialize(const char*, const char*);
 	bool ShutDown();
-
-private:
-	bool CompileShader(const char*, GLenum, GLuint&);
-	GLchar* Shader::ReadShader(const char*);
 
 protected:
 	GLuint m_program;

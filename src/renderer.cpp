@@ -19,13 +19,15 @@ Renderer::~Renderer()
 
 bool Renderer::Initialize(int width, int height)
 {
-	//glewExperimental = true; // Needed for core profile
+#ifdef _WIN32
+	glewExperimental = true; // Needed for core profile
 	GLint result = glewInit();
 	if (GLEW_OK != result)
 	{
 		LogDebug("%s", glewGetErrorString(result));
 		exit(EXIT_FAILURE);
 	}
+#endif
 
 	glClearColor(0.4f, 0.4f, 1.0f, 1.0f); // CYAN
 	glEnable(GL_DEPTH_TEST);

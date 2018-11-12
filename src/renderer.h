@@ -1,21 +1,9 @@
 #pragma once
 
-#ifdef _WIN32
-#include <GL/glew.h>
-#endif
-#include <GLFW/glfw3.h>
-#include <glm/gtc/matrix_transform.hpp>
-
 namespace kidsnow {
 
 class SimpleShader;
 class Model;
-
-typedef struct {
-    GLenum       type;
-    const char*  filename;
-    GLuint       shader;
-} ShaderInfo;
 
 class Renderer {
 public:

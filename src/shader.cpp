@@ -1,6 +1,10 @@
 #include "shader.h"
 #include "helper.h"
 
+#include "graphics.h"
+
+#include <cstdio>
+
 namespace kidsnow {
 
 Shader::Shader()
@@ -12,7 +16,7 @@ Shader::~Shader()
 {
 }
 
-GLchar* Shader::ReadShader(const char* fileName) {
+GLchar* ReadShader(const char* fileName) {
 	FILE* infile = fopen(fileName, "rb");
 
 	if (!infile) {
@@ -34,7 +38,7 @@ GLchar* Shader::ReadShader(const char* fileName) {
 	return source;
 }
 
-bool Shader::CompileShader(const char* shaderFileName, GLenum shaderType, GLuint& shader)
+bool CompileShader(const char* shaderFileName, GLenum shaderType, GLuint& shader)
 {
 	shader = glCreateShader(shaderType);
 	if (shader == NULL)
