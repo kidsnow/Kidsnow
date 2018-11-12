@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\application.cpp" />
+    <ClCompile Include="..\..\..\src\glcontext.cpp" />
     <ClCompile Include="..\..\..\src\input.cpp" />
     <ClCompile Include="..\..\..\src\main.cpp" />
     <ClCompile Include="..\..\..\src\model.cpp" />
@@ -31,8 +32,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\application.h" />
+    <ClInclude Include="..\..\..\src\glcontext.h" />
+    <ClInclude Include="..\..\..\src\graphics.h" />
     <ClInclude Include="..\..\..\src\input.h" />
-    <ClInclude Include="..\..\..\src\helper.h" />
+    <ClInclude Include="..\..\..\src\logger.h" />
     <ClInclude Include="..\..\..\src\model.h" />
     <ClInclude Include="..\..\..\src\renderer.h" />
     <ClInclude Include="..\..\..\src\shader.h" />

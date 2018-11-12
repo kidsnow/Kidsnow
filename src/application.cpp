@@ -1,5 +1,5 @@
 #include "application.h"
-#include "helper.h"
+#include "logger.h"
 
 #include "renderer.h"
 #include "window.h"

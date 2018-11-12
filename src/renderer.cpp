@@ -1,6 +1,7 @@
 #include "renderer.h"
-#include "helper.h"
+#include "logger.h"
 
+#include "glcontext.h"
 #include "simpleshader.h"
 #include "model.h"
 
@@ -8,30 +9,21 @@ namespace kidsnow {
 
 Renderer::Renderer()
 {
+	m_context = new GLContext();
 	m_simpleShader = new SimpleShader();
 	m_model = new Model();
 }
 
 Renderer::~Renderer()
 {
-
+	delete m_model;
+	delete m_simpleShader;
+	delete m_context;
 }
 
 bool Renderer::Initialize(int width, int height)
 {
-#ifdef _WIN32
-	glewExperimental = true; // Needed for core profile
-	GLint result = glewInit();
-	if (GLEW_OK != result)
-	{
-		LogDebug("%s", glewGetErrorString(result));
-		exit(EXIT_FAILURE);
-	}
-#endif
-
-	glClearColor(0.4f, 0.4f, 1.0f, 1.0f); // CYAN
-	glEnable(GL_DEPTH_TEST);
-
+	if (!m_context->Initialize()) return false;
 	if (!m_simpleShader->Initialize("../../../src/resource/simple.vert", "../../../src/resource/simple.frag")) return false;
 	if (!m_model->Initialize()) return false;
 
@@ -40,8 +32,7 @@ bool Renderer::Initialize(int width, int height)
 
 void Renderer::Render()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	m_context->Render();
 	m_model->Render();
 	m_simpleShader->Render();
 }
