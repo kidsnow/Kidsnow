@@ -1,11 +1,20 @@
 project(KIDSNOW_ENGINE)
 cmake_minimum_required(VERSION 3.9)
 
-add_definitions(-D_DEBUG -DTOS -DGL_GLEXT_PROTOTYPES)
+add_definitions(-D_DEBUG)
 
 set(PROJECT_DIR ${CMAKE_SOURCE_DIR}/../..)
 
-include_directories(/system/include)
+if (APPLE)
+    set(FRAMEWORK_DEPENDENCIES Cocoa OpenGL IOKit CoreVideo)
+    foreach (FRAMEWORK ${FRAMEWORK_DEPENDENCIES})
+        find_library(LIB_${FRAMEWORK} ${FRAMEWORK})
+        list (APPEND FRAMEWORK_LIST ${LIB_${FRAMEWORK}})
+        if(NOT LIB_${FRAMEWORK})
+            message(FATAL_ERROR "${FRAMEWORK} not found")
+        endif()
+    endforeach()
+endif()
 
 include_directories(${PROJECT_DIR}/include)
 link_directories(${PROJECT_DIR}/lib/Mac)
