@@ -19,6 +19,7 @@ Window::~Window()
 
 bool Window::Initialize()
 {
+    /*
 	if (!glfwInit())
 	{
 		LogDebug("GLFW initialize failed!");
@@ -41,11 +42,13 @@ bool Window::Initialize()
 
     Greetings();
 
+    */
     return true;
 }
 
 void Window::Greetings()
 {
+    /*
 #ifndef _WIN32
     std::cout << ANSI_COLOR_CYAN;
 #endif
@@ -57,16 +60,20 @@ void Window::Greetings()
 #ifndef _WIN32
     std::cout << ANSI_COLOR_RESET;
 #endif
+    */
 }
 
 void Window::Update(Input* input)
 {
+    /*
     glfwSwapBuffers(m_window);
     glfwPollEvents();
+    */
 }
 
 bool Window::Finalize()
 {
+    /*
 	if (glfwWindowShouldClose(m_window))
 	{
 		glfwDestroyWindow(m_window);
@@ -74,6 +81,7 @@ bool Window::Finalize()
 		return true;
 	}
 
+    */
 	return false;
 }
 
