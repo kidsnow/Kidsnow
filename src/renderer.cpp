@@ -24,7 +24,7 @@ Renderer::~Renderer()
 bool Renderer::Initialize(int width, int height)
 {
 	if (!m_context->Initialize()) return false;
-	if (!m_simpleShader->Initialize("../../../src/resource/simple.vert", "../../../src/resource/simple.frag")) return false;
+	if (!m_simpleShader->Initialize("resource/simple.vert", "resource/simple.frag")) return false;
 	if (!m_model->Initialize()) return false;
 
 	return true;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GLFW/glfw3.h>
+#include "graphics.h"
 #include <string>
 
 namespace kidsnow {

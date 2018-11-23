@@ -18,7 +18,6 @@ Shader::~Shader()
 
 GLchar* ReadShader(const char* fileName) {
 	FILE* infile = fopen(fileName, "rb");
-
 	if (!infile) {
 		LogDebug("Unable to open file '%s'", fileName);
 		return NULL;

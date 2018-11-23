@@ -1,10 +1,5 @@
 #include "model.h"
 
-#ifdef _WIN32
-#include <GL/glew.h>
-#endif
-#include <GLFW/glfw3.h>
-
 namespace kidsnow {
 
 

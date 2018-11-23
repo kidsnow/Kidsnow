@@ -2,7 +2,11 @@
 #include "logger.h"
 
 #include "renderer.h"
+#ifdef OS_TOS
 #include "tos_window.h"
+#else
+#include "window.h"
+#endif
 #include "input.h"
 
 namespace kidsnow {
@@ -10,7 +14,11 @@ namespace kidsnow {
 Application::Application(std::string appName, int width, int height)
 {
     m_appName = appName;
+#ifdef OS_TOS
     m_window = new TOSWindow(m_appName, width, height);
+#else
+    m_window = new Window(m_appName, width, height);
+#endif
     m_renderer = new Renderer();
 	m_input = new Input();
 }
