@@ -28,7 +28,6 @@
     <ClCompile Include="..\..\..\src\shader.cpp" />
     <ClCompile Include="..\..\..\src\simpleshader.cpp" />
     <ClCompile Include="..\..\..\src\textureshader.cpp" />
-    <ClCompile Include="..\..\..\src\tos_window.cpp" />
     <ClCompile Include="..\..\..\src\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -43,7 +42,6 @@
     <ClInclude Include="..\..\..\src\shader.h" />
     <ClInclude Include="..\..\..\src\simpleshader.h" />
     <ClInclude Include="..\..\..\src\textureshader.h" />
-    <ClInclude Include="..\..\..\src\tos_window.h" />
     <ClInclude Include="..\..\..\src\window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -135,7 +133,10 @@
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy /y $(SolutionDir)..\..\dll\$(PlatformTarget)\glew32.dll $(OutDir)</Command>
+      <Command>xcopy /y $(SolutionDir)..\..\lib\Windows\$(PlatformTarget)\glew32.dll $(OutDir) 
+
+xcopy /y $(SolutionDir)..\..\src\resource $(OutDir)\resource /s /i 
+xcopy /y $(SolutionDir)..\..\src\resource $(ProjectDir)\resource /s /i</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -148,7 +149,10 @@
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy /y $(SolutionDir)..\..\dll\$(PlatformTarget)\glew32.dll $(OutDir)</Command>
+      <Command>xcopy /y $(SolutionDir)..\..\lib\Windows\$(PlatformTarget)\glew32.dll $(OutDir) 
+
+xcopy /y $(SolutionDir)..\..\src\resource $(OutDir)\resource /s /i 
+xcopy /y $(SolutionDir)..\..\src\resource $(ProjectDir)\resource /s /i</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -165,7 +169,10 @@
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy /y $(SolutionDir)..\..\dll\$(PlatformTarget)\glew32.dll $(OutDir)</Command>
+      <Command>xcopy /y $(SolutionDir)..\..\lib\Windows\$(PlatformTarget)\glew32.dll $(OutDir) 
+
+xcopy /y $(SolutionDir)..\..\src\resource $(OutDir)\resource /s /i 
+xcopy /y $(SolutionDir)..\..\src\resource $(ProjectDir)\resource /s /i</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -182,7 +189,10 @@
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy /y $(SolutionDir)..\..\dll\$(PlatformTarget)\glew32.dll $(OutDir)</Command>
+      <Command>xcopy /y $(SolutionDir)..\..\lib\Windows\$(PlatformTarget)\glew32.dll $(OutDir) 
+
+xcopy /y $(SolutionDir)..\..\src\resource $(OutDir)\resource /s /i 
+xcopy /y $(SolutionDir)..\..\src\resource $(ProjectDir)\resource /s /i</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
