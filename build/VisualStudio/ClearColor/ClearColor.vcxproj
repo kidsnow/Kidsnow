@@ -22,6 +22,7 @@
     <ClCompile Include="..\..\..\src\application.cpp" />
     <ClCompile Include="..\..\..\src\glcontext.cpp" />
     <ClCompile Include="..\..\..\src\glrenderer.cpp" />
+    <ClCompile Include="..\..\..\src\glwindow.cpp" />
     <ClCompile Include="..\..\..\src\input.cpp" />
     <ClCompile Include="..\..\..\src\main.cpp" />
     <ClCompile Include="..\..\..\src\glmodel.cpp" />
@@ -29,14 +30,18 @@
     <ClCompile Include="..\..\..\src\glshader.cpp" />
     <ClCompile Include="..\..\..\src\simpleglshader.cpp" />
     <ClCompile Include="..\..\..\src\textureglshader.cpp" />
-    <ClCompile Include="..\..\..\src\window.cpp" />
+    <ClCompile Include="..\..\..\src\vkrenderer.cpp" />
+    <ClCompile Include="..\..\..\src\vkwindow.cpp" />
+    <ClCompile Include="..\..\..\src\windowfactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\application.h" />
+    <ClInclude Include="..\..\..\src\glcommon.h" />
     <ClInclude Include="..\..\..\src\glcontext.h" />
     <ClInclude Include="..\..\..\src\glrenderer.h" />
-    <ClInclude Include="..\..\..\src\graphics.h" />
+    <ClInclude Include="..\..\..\src\glwindow.h" />
     <ClInclude Include="..\..\..\src\input.h" />
+    <ClInclude Include="..\..\..\src\kidsnow.h" />
     <ClInclude Include="..\..\..\src\logger.h" />
     <ClInclude Include="..\..\..\src\glmodel.h" />
     <ClInclude Include="..\..\..\src\renderer.h" />
@@ -44,7 +49,11 @@
     <ClInclude Include="..\..\..\src\glshader.h" />
     <ClInclude Include="..\..\..\src\simpleglshader.h" />
     <ClInclude Include="..\..\..\src\textureglshader.h" />
+    <ClInclude Include="..\..\..\src\vkcommon.h" />
+    <ClInclude Include="..\..\..\src\vkrenderer.h" />
+    <ClInclude Include="..\..\..\src\vkwindow.h" />
     <ClInclude Include="..\..\..\src\window.h" />
+    <ClInclude Include="..\..\..\src\windowfactory.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\src\resource\simple.frag" />
@@ -130,6 +139,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -146,6 +156,7 @@ xcopy /y $(SolutionDir)..\..\src\resource $(ProjectDir)\resource /s /i</Command>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -164,6 +175,7 @@ xcopy /y $(SolutionDir)..\..\src\resource $(ProjectDir)\resource /s /i</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -184,6 +196,7 @@ xcopy /y $(SolutionDir)..\..\src\resource $(ProjectDir)\resource /s /i</Command>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

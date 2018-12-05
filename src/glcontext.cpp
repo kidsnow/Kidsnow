@@ -1,5 +1,5 @@
 #include "glcontext.h"
-#include "graphics.h"
+#include "glcommon.h"
 #include "logger.h"
 
 namespace kidsnow {

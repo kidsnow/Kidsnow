@@ -1,6 +1,6 @@
 #pragma once
 
-#include "graphics.h"
+#include <GLFW/glfw3.h>
 #include <string>
 
 namespace kidsnow {
@@ -9,27 +9,26 @@ class Input;
 
 class Window {
 public:
-    Window(std::string windowName, int width, int height);
-    ~Window();
+	Window(std::string windowName, int width, int height) :
+		m_windowName(windowName), m_width(width), m_height(height) {}
+	~Window() {}
 
 public:
-    virtual bool Initialize();
-    virtual void Update(Input*);
-	virtual bool Finalize();
+    virtual bool Initialize() = 0;
+    virtual void Update(Input*) = 0;
+	virtual bool Finalize() = 0;
+
+protected:
+	virtual void Greetings() = 0;
 
 public:
 	inline int GetWidowWidth() { return m_width; }
 	inline int GetWidowHeight() { return m_height; }
 
 protected:
-    void Greetings();
-
-protected:
 	std::string m_windowName;
 	int m_width;
 	int m_height;
-
-private:
     GLFWwindow* m_window;
 };
 

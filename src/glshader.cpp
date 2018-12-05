@@ -1,7 +1,7 @@
 #include "glshader.h"
 #include "logger.h"
 
-#include "graphics.h"
+#include "glcommon.h"
 
 #include <cstdio>
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "graphics.h"
+#include "glcommon.h"
 
 namespace kidsnow {
 

@@ -4,11 +4,7 @@
 
 namespace kidsnow {
 
-enum class SupportedAPI
-{
-	KIDSNOW_OPENGL,
-	KIDSNOW_VULKAN,
-};
+enum class SupportedAPI;
 
 class RendererFactory
 {
