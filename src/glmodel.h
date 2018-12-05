@@ -4,11 +4,11 @@
 
 namespace kidsnow {
 
-class Model
+class GLModel
 {
 public:
-	Model();
-	~Model();
+	GLModel();
+	~GLModel();
 
 public:
 	bool Initialize();

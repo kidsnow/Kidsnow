@@ -1,14 +1,14 @@
 #pragma once
 
-#include "shader.h"
+#include "glshader.h"
 
 namespace kidsnow {
 
-class TextureShader : public Shader
+class TextureGLShader : public GLShader
 {
 public:
-	TextureShader();
-	~TextureShader();
+	TextureGLShader();
+	~TextureGLShader();
 
 private:
 	bool Initialize(const char*, const char*);

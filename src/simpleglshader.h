@@ -1,14 +1,14 @@
 #pragma once
 
-#include "shader.h"
+#include "glshader.h"
 
 namespace kidsnow {
 
-class SimpleShader : public Shader
+class SimpleGLShader : public GLShader
 {
 public:
-	SimpleShader();
-	~SimpleShader();
+	SimpleGLShader();
+	~SimpleGLShader();
 
 public:
 	virtual void Render();

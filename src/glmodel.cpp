@@ -1,18 +1,18 @@
-#include "model.h"
+#include "glmodel.h"
 
 namespace kidsnow {
 
 
-Model::Model()
+GLModel::GLModel()
 {
 }
 
 
-Model::~Model()
+GLModel::~GLModel()
 {
 }
 
-bool Model::Initialize()
+bool GLModel::Initialize()
 {
 	static const GLfloat triangleVertices[] = {
 		-1.0f, -1.0f, 0.0f,
@@ -39,7 +39,7 @@ bool Model::Initialize()
 	return true;
 }
 
-bool Model::Render()
+bool GLModel::Render()
 {
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, m_triangleVBO);

@@ -1,27 +1,28 @@
-#include "renderer.h"
+#include "glrenderer.h"
 #include "logger.h"
 
 #include "glcontext.h"
-#include "simpleshader.h"
-#include "model.h"
+#include "simpleglshader.h"
+#include "glmodel.h"
+#include "input.h"
 
 namespace kidsnow {
 
-Renderer::Renderer()
+GLRenderer::GLRenderer()
 {
 	m_context = new GLContext();
-	m_simpleShader = new SimpleShader();
-	m_model = new Model();
+	m_simpleShader = new SimpleGLShader();
+	m_model = new GLModel();
 }
 
-Renderer::~Renderer()
+GLRenderer::~GLRenderer()
 {
 	delete m_model;
 	delete m_simpleShader;
 	delete m_context;
 }
 
-bool Renderer::Initialize(int width, int height)
+bool GLRenderer::Initialize(int width, int height)
 {
 	if (!m_context->Initialize()) return false;
 	if (!m_simpleShader->Initialize("resource/simple.vert", "resource/simple.frag")) return false;
@@ -30,7 +31,7 @@ bool Renderer::Initialize(int width, int height)
 	return true;
 }
 
-void Renderer::Render()
+void GLRenderer::Render(Input* input)
 {
 	m_context->Render();
 	m_model->Render();

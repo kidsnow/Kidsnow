@@ -1,7 +1,7 @@
 #include "application.h"
 #include "logger.h"
 
-#include "renderer.h"
+#include "rendererfactory.h"
 #ifdef OS_TOS
 #include "tos_window.h"
 #else
@@ -19,12 +19,16 @@ Application::Application(std::string appName, int width, int height)
 #else
     m_window = new Window(m_appName, width, height);
 #endif
-    m_renderer = new Renderer();
+	RendererFactory* rendererFactory = new RendererFactory();
+    m_renderer = rendererFactory->GetRenderer(SupportedAPI::KIDSNOW_OPENGL);
 	m_input = new Input();
 }
 
 Application::~Application()
 {
+	delete m_window;
+	delete m_input;
+	delete m_renderer;
     LogInfo("Bye!");
 }
 
@@ -51,7 +55,7 @@ void Application::Run()
 {
     while (!m_window->Finalize())
     {
-        m_renderer->Render();
+        m_renderer->Render(m_input);
         m_window->Update(m_input);
     }
 }

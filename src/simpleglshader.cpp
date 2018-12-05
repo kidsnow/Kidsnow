@@ -1,19 +1,19 @@
-#include "simpleshader.h"
+#include "simpleglshader.h"
 
 namespace kidsnow {
 
-SimpleShader::SimpleShader()
+SimpleGLShader::SimpleGLShader()
 {
 }
 
 
-SimpleShader::~SimpleShader()
+SimpleGLShader::~SimpleGLShader()
 {
 }
 
-bool SimpleShader::Initialize(const char* vsFileName, const char* fsFileName)
+bool SimpleGLShader::Initialize(const char* vsFileName, const char* fsFileName)
 {
-	if (!Shader::Initialize(vsFileName, fsFileName)) return false;
+	if (!GLShader::Initialize(vsFileName, fsFileName)) return false;
 
 	/*m_locMVPMatrix = glGetUniformLocation(m_program, "u_ModelViewProjectionMatrix");
 	m_locPrimitiveColor = glGetUniformLocation(m_program, "u_primitive_color");*/
@@ -21,13 +21,13 @@ bool SimpleShader::Initialize(const char* vsFileName, const char* fsFileName)
 	return true;
 }
 
-bool SimpleShader::SetShaderParameters()
+bool SimpleGLShader::SetShaderParameters()
 {
 
 	return true;
 }
 
-void SimpleShader::Render()
+void SimpleGLShader::Render()
 {
 	glUseProgram(m_program);
 	SetShaderParameters();

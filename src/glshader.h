@@ -4,11 +4,11 @@
 
 namespace kidsnow {
 
-class Shader
+class GLShader
 {
 public:
-	Shader();
-	~Shader();
+	GLShader();
+	~GLShader();
 
 public:
 	bool Initialize(const char*, const char*);

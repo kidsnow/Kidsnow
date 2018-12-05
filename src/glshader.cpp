@@ -1,4 +1,4 @@
-#include "shader.h"
+#include "glshader.h"
 #include "logger.h"
 
 #include "graphics.h"
@@ -7,12 +7,12 @@
 
 namespace kidsnow {
 
-Shader::Shader()
+GLShader::GLShader()
 {
 }
 
 
-Shader::~Shader()
+GLShader::~GLShader()
 {
 }
 
@@ -72,7 +72,7 @@ bool CompileShader(const char* shaderFileName, GLenum shaderType, GLuint& shader
 	return true;
 }
 
-bool Shader::Initialize(const char* vsFileName, const char* fsFileName)
+bool GLShader::Initialize(const char* vsFileName, const char* fsFileName)
 {
 	m_program = glCreateProgram();
 	if (m_program == NULL)
@@ -100,7 +100,7 @@ bool Shader::Initialize(const char* vsFileName, const char* fsFileName)
 	return true;
 }
 
-bool Shader::ShutDown()
+bool GLShader::ShutDown()
 {
 	return true;
 }
