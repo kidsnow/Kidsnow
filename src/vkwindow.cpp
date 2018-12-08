@@ -12,6 +12,12 @@ VKWindow::~VKWindow() {}
 
 bool VKWindow::Initialize()
 {
+	glfwInit();
+
+	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+
+	m_window = glfwCreateWindow(m_width, m_height, "Vulkan", nullptr, nullptr);
 
 	return true;
 }
@@ -23,13 +29,19 @@ void VKWindow::Greetings()
 
 void VKWindow::Update(Input* input)
 {
-
+	glfwPollEvents();
 }
 
 bool VKWindow::Finalize()
 {
+	if (glfwWindowShouldClose(m_window))
+	{
+		glfwDestroyWindow(m_window);
+		glfwTerminate();
+		return true;
+	}
 
-	return true;
+	return false;
 }
 
 } // end of kidsnow

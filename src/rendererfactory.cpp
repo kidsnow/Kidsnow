@@ -8,9 +8,9 @@ namespace kidsnow {
 
 Renderer* RendererFactory::GetRenderer(SupportedAPI graphicsAPI)
 {
-	if (graphicsAPI == SupportedAPI::KIDSNOW_OPENGL)
+	if (graphicsAPI == SupportedAPI::OPENGL)
 		return new GLRenderer();
-	else if (graphicsAPI == SupportedAPI::KIDSNOW_VULKAN)
+	else if (graphicsAPI == SupportedAPI::VULKAN)
 		return new VKRenderer();
 	
 	LogDebug("This API is not supported.");
