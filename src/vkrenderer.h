@@ -19,20 +19,20 @@ private:
 	VkInstance m_instance;
 
 private:
-	bool checkValidationLayerSupport();
-	bool createInstance();
-	bool setupDebugCallback();
-	bool createSurface();
-	bool pickPhysicalDevice();
-	bool createLogicalDevice();
-	bool createSwapChain();
-	bool createImageViews();
-	bool createRenderPass();
-	bool createGraphicsPipeline();
-	bool createFramebuffers();
-	bool createCommandPool();
-	bool createCommandBuffers();
-	bool createSyncObjects();
+	bool CheckValidationLayerSupport();
+	bool CreateInstance();
+	bool SetupDebugCallback();
+	bool CreateSurface();
+	bool PickPhysicalDevice();
+	bool CreateLogicalDevice();
+	bool CreateSwapChain();
+	bool CreateImageViews();
+	bool CreateRenderPass();
+	bool CreateGraphicsPipeline();
+	bool CreateFramebuffers();
+	bool CreateCommandPool();
+	bool CreateCommandBuffers();
+	bool CreateSyncObjects();
 };
 
 }

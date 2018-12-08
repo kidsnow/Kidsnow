@@ -12,12 +12,12 @@ VKRenderer::~VKRenderer()
 	vkDestroyInstance(m_instance, nullptr);
 };
 
-bool VKRenderer::checkValidationLayerSupport()
+bool VKRenderer::CheckValidationLayerSupport()
 {
 	return true;
 }
 
-bool VKRenderer::createInstance()
+bool VKRenderer::CreateInstance()
 {
 	VkApplicationInfo appInfo = {};
 	appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
@@ -39,58 +39,58 @@ bool VKRenderer::createInstance()
 
 	return true;
 }
-bool VKRenderer::setupDebugCallback() {
+bool VKRenderer::SetupDebugCallback() {
 	return true;
 }
-bool VKRenderer::createSurface() {
+bool VKRenderer::CreateSurface() {
 	return true;
 }
-bool VKRenderer::pickPhysicalDevice() {
+bool VKRenderer::PickPhysicalDevice() {
 	return true;
 }
-bool VKRenderer::createLogicalDevice() {
+bool VKRenderer::CreateLogicalDevice() {
 	return true;
 }
-bool VKRenderer::createSwapChain() {
+bool VKRenderer::CreateSwapChain() {
 	return true;
 }
-bool VKRenderer::createImageViews() {
+bool VKRenderer::CreateImageViews() {
 	return true;
 }
-bool VKRenderer::createRenderPass() {
+bool VKRenderer::CreateRenderPass() {
 	return true;
 }
-bool VKRenderer::createGraphicsPipeline() {
+bool VKRenderer::CreateGraphicsPipeline() {
 	return true;
 }
-bool VKRenderer::createFramebuffers() {
+bool VKRenderer::CreateFramebuffers() {
 	return true;
 }
-bool VKRenderer::createCommandPool() {
+bool VKRenderer::CreateCommandPool() {
 	return true;
 }
-bool VKRenderer::createCommandBuffers() {
+bool VKRenderer::CreateCommandBuffers() {
 	return true;
 }
-bool VKRenderer::createSyncObjects() {
+bool VKRenderer::CreateSyncObjects() {
 	return true;
 }
 
 bool VKRenderer::Initialize(int width, int height)
 {
-	createInstance();
-	setupDebugCallback();
-	createSurface();
-	pickPhysicalDevice();
-	createLogicalDevice();
-	createSwapChain();
-	createImageViews();
-	createRenderPass();
-	createGraphicsPipeline();
-	createFramebuffers();
-	createCommandPool();
-	createCommandBuffers();
-	createSyncObjects();
+	CreateInstance();
+	SetupDebugCallback();
+	CreateSurface();
+	PickPhysicalDevice();
+	CreateLogicalDevice();
+	CreateSwapChain();
+	CreateImageViews();
+	CreateRenderPass();
+	CreateGraphicsPipeline();
+	CreateFramebuffers();
+	CreateCommandPool();
+	CreateCommandBuffers();
+	CreateSyncObjects();
 
 	return true;
 }
