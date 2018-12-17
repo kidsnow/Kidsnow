@@ -9,16 +9,7 @@ GLContext::~GLContext() {};
 
 bool GLContext::Initialize()
 {
-#ifdef _WIN32
-	glewExperimental = true; // Needed for core profile
-	GLint result = glewInit();
-	if (GLEW_OK != result)
-	{
-		LogDebug("%s", glewGetErrorString(result));
-		exit(EXIT_FAILURE);
-	}
-#endif
-
+	gladLoadGL();
 	glClearColor(0.4f, 0.4f, 1.0f, 1.0f); // CYAN
 	glEnable(GL_DEPTH_TEST);
 	return true;

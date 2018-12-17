@@ -13,13 +13,13 @@ Application::Application(std::string appName, int width, int height)
     m_appName = appName;
 
 	WindowFactory* windowFactory = new WindowFactory();
-	m_window = windowFactory->GetWindow(m_appName, width, height, SupportedAPI::VULKAN);
+	m_window = windowFactory->GetWindow(m_appName, width, height, SupportedAPI::OPENGL);
 
 	if (m_window == nullptr)
 		exit(0);
 
 	RendererFactory* rendererFactory = new RendererFactory();
-    m_renderer = rendererFactory->GetRenderer(SupportedAPI::VULKAN);
+    m_renderer = rendererFactory->GetRenderer(SupportedAPI::OPENGL);
 
 	if (m_renderer == nullptr)
 		exit(0);

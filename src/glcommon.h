@@ -1,7 +1,7 @@
 #pragma once
 
 #ifdef _WIN32
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
 #elif __APPLE__
