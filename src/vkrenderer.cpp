@@ -9,7 +9,7 @@ VKRenderer::VKRenderer() {};
 
 VKRenderer::~VKRenderer()
 {
-	vkDestroyInstance(m_instance, nullptr);
+	//vkDestroyInstance(m_instance, nullptr);
 };
 
 bool VKRenderer::CheckValidationLayerSupport()
@@ -19,7 +19,8 @@ bool VKRenderer::CheckValidationLayerSupport()
 
 bool VKRenderer::CreateInstance()
 {
-	VkApplicationInfo appInfo = {};
+/*
+    VkApplicationInfo appInfo = {};
 	appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
 	appInfo.pApplicationName = "Hello Triangle";
 	appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
@@ -36,7 +37,7 @@ bool VKRenderer::CreateInstance()
 	if (vkCreateInstance(&createInfo, nullptr, &m_instance) != VK_SUCCESS) {
 		return false;
 	}
-
+*/
 	return true;
 }
 bool VKRenderer::SetupDebugCallback() {
