@@ -36,9 +36,6 @@
     <ClCompile Include="..\..\..\src\input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\glcontext.cpp">
-      <Filter>Source Files\GL</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\glrenderer.cpp">
       <Filter>Source Files\GL</Filter>
     </ClCompile>
@@ -88,9 +85,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\logger.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\glcontext.h">
-      <Filter>Header Files\GL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\glrenderer.h">
       <Filter>Header Files\GL</Filter>

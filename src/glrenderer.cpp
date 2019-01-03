@@ -1,7 +1,6 @@
 #include "glrenderer.h"
 #include "logger.h"
 
-#include "glcontext.h"
 #include "simpleglshader.h"
 #include "glmodel.h"
 #include "input.h"
@@ -10,7 +9,6 @@ namespace kidsnow {
 
 GLRenderer::GLRenderer()
 {
-	m_context = new GLContext();
 	m_simpleShader = new SimpleGLShader();
 	m_model = new GLModel();
 }
@@ -19,21 +17,25 @@ GLRenderer::~GLRenderer()
 {
 	delete m_model;
 	delete m_simpleShader;
-	delete m_context;
 }
 
 bool GLRenderer::Initialize(int width, int height)
 {
-	if (!m_context->Initialize()) return false;
+	gladLoadGL();
+
 	if (!m_simpleShader->Initialize("resource/simple.vert", "resource/simple.frag")) return false;
 	if (!m_model->Initialize()) return false;
+
+	glClearColor(0.4f, 0.4f, 1.0f, 1.0f); // CYAN
+	glEnable(GL_DEPTH_TEST);
 
 	return true;
 }
 
 void GLRenderer::Render(Input* input)
 {
-	m_context->Render();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	m_model->Render();
 	m_simpleShader->Render();
 }

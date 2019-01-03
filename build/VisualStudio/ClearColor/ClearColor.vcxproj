@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\application.cpp" />
     <ClCompile Include="..\..\..\src\glad.c" />
-    <ClCompile Include="..\..\..\src\glcontext.cpp" />
     <ClCompile Include="..\..\..\src\glrenderer.cpp" />
     <ClCompile Include="..\..\..\src\glwindow.cpp" />
     <ClCompile Include="..\..\..\src\input.cpp" />
@@ -38,7 +37,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\src\application.h" />
     <ClInclude Include="..\..\..\src\glcommon.h" />
-    <ClInclude Include="..\..\..\src\glcontext.h" />
     <ClInclude Include="..\..\..\src\glrenderer.h" />
     <ClInclude Include="..\..\..\src\glwindow.h" />
     <ClInclude Include="..\..\..\src\input.h" />
@@ -64,7 +62,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{2030F6F0-4DDC-4D43-B690-EF648DAD89C5}</ProjectGuid>
     <RootNamespace>ClearColor</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
