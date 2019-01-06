@@ -4,6 +4,8 @@
 
 namespace kidsnow {
 
+class GLShader;
+
 class GLModel
 {
 public:
@@ -13,9 +15,11 @@ public:
 public:
 	bool Initialize();
 	bool Render();
+	void RegisterShader(GLShader*);
 
 private:
 	GLuint m_triangleVBO, m_triangleVAO;
+	GLShader* m_shader;
 };
 
 } // end of kidsnow

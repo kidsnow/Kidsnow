@@ -14,7 +14,7 @@ SimpleGLShader::~SimpleGLShader()
 bool SimpleGLShader::Initialize(const char* vsFileName, const char* fsFileName)
 {
 	if (!GLShader::Initialize(vsFileName, fsFileName)) return false;
-
+	
 	/*m_locMVPMatrix = glGetUniformLocation(m_program, "u_ModelViewProjectionMatrix");
 	m_locPrimitiveColor = glGetUniformLocation(m_program, "u_primitive_color");*/
 
@@ -31,7 +31,6 @@ void SimpleGLShader::Render()
 {
 	glUseProgram(m_program);
 	SetShaderParameters();
-	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 } // end of kidsnow

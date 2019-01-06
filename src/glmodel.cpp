@@ -1,4 +1,5 @@
 #include "glmodel.h"
+#include "glshader.h"
 
 namespace kidsnow {
 
@@ -39,11 +40,20 @@ bool GLModel::Initialize()
 	return true;
 }
 
+void GLModel::RegisterShader(GLShader* shader)
+{
+	m_shader = shader;
+}
+
 bool GLModel::Render()
 {
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, m_triangleVBO);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
+
+	m_shader->Render();
+
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	return true;
 }
