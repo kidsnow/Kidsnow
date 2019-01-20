@@ -14,8 +14,8 @@ public:
 
 public:
 	bool Initialize();
-	bool Render();
-	void RegisterShader(GLShader*);
+	bool Render(glm::mat4x4);
+	void DrawLikeThis(GLShader*);
 
 private:
 	GLuint m_triangleVBO, m_triangleVAO;

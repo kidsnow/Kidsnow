@@ -40,12 +40,12 @@ bool GLModel::Initialize()
 	return true;
 }
 
-void GLModel::RegisterShader(GLShader* shader)
+void GLModel::DrawLikeThis(GLShader* shader)
 {
 	m_shader = shader;
 }
 
-bool GLModel::Render()
+bool GLModel::Render(glm::mat4x4 viewProjectionMatrix)
 {
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, m_triangleVBO);

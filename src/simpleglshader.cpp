@@ -15,22 +15,20 @@ bool SimpleGLShader::Initialize(const char* vsFileName, const char* fsFileName)
 {
 	if (!GLShader::Initialize(vsFileName, fsFileName)) return false;
 	
-	/*m_locMVPMatrix = glGetUniformLocation(m_program, "u_ModelViewProjectionMatrix");
-	m_locPrimitiveColor = glGetUniformLocation(m_program, "u_primitive_color");*/
+	m_MVPMatLoc = glGetUniformLocation(m_program, "u_MVPMat");
 
 	return true;
 }
 
-bool SimpleGLShader::SetShaderParameters()
+void SimpleGLShader::SetParameters(glm::mat4x4 MVPMat)
 {
-
-	return true;
+	m_MVPMat = MVPMat;
 }
 
 void SimpleGLShader::Render()
 {
 	glUseProgram(m_program);
-	SetShaderParameters();
+	glProgramUniform4fv(m_program, m_MVPMatLoc, 1, &m_MVPMat[0][0]);
 }
 
 } // end of kidsnow

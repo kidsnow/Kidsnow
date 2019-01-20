@@ -18,13 +18,13 @@ public:
 	glm::vec4 GetPosition();
 	glm::vec4 GetRotation();
 
-	void Render();
-	void GetViewMatrix(glm::mat4x4&);
+	void SetUp();
+	glm::mat4x4 GetViewProjectionMatrix();
 
 private:
 	float m_positionX, m_positionY, m_positionZ;
 	float m_rotationX, m_rotationY, m_rotationZ;
-	glm::mat4x4 m_viewMatrix;
+	glm::mat4x4 m_viewMatrix, m_projectionMatrix;
 };
 
 }

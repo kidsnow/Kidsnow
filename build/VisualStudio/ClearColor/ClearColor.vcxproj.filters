@@ -72,6 +72,9 @@
     <ClCompile Include="..\..\..\src\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\glscene.cpp">
+      <Filter>Source Files\GL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\src\renderer.h">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\src\camera.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\glscene.h">
+      <Filter>Header Files\GL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

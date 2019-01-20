@@ -23,6 +23,7 @@
     <ClCompile Include="..\..\..\src\camera.cpp" />
     <ClCompile Include="..\..\..\src\glad.c" />
     <ClCompile Include="..\..\..\src\glrenderer.cpp" />
+    <ClCompile Include="..\..\..\src\glscene.cpp" />
     <ClCompile Include="..\..\..\src\glwindow.cpp" />
     <ClCompile Include="..\..\..\src\input.cpp" />
     <ClCompile Include="..\..\..\src\main.cpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="..\..\..\src\camera.h" />
     <ClInclude Include="..\..\..\src\glcommon.h" />
     <ClInclude Include="..\..\..\src\glrenderer.h" />
+    <ClInclude Include="..\..\..\src\glscene.h" />
     <ClInclude Include="..\..\..\src\glwindow.h" />
     <ClInclude Include="..\..\..\src\input.h" />
     <ClInclude Include="..\..\..\src\kidsnow.h" />

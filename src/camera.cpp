@@ -54,7 +54,7 @@ glm::vec4 Camera::GetRotation()
 }
 
 
-void Camera::Render()
+void Camera::SetUp()
 {
 	glm::vec4 up, position, lookAt;
 	float yaw, pitch, roll;
@@ -81,23 +81,24 @@ void Camera::Render()
 	rotationMatrix *= glm::rotate(m_rotationZ, glm::vec3(0.0, 0.0, 1.0));
 
 	// Transform the lookAt and up vector by the rotation matrix so the view is correctly rotated at the origin.
-	lookAt *= rotationMatrix;
-	up *= rotationMatrix;
+	lookAt = rotationMatrix * lookAt;
+	up = rotationMatrix * up;
 
 	// Translate the rotated camera position to the location of the viewer.
 	lookAt = position + lookAt;
 
 	// Finally create the view matrix from the three updated vectors.
-	//m_viewMatrix = glm::lookAt(position.xyz(), lookAt.xyz(), up.xyz());
+	m_viewMatrix = glm::lookAt(glm::vec3(position), glm::vec3(lookAt), glm::vec3(up));
+
+	m_projectionMatrix = glm::perspective(glm::radians(30.0f), 4.0f / 3.0f, 0.1f, 10.0f);
+
 
 	return;
 }
 
-
-void Camera::GetViewMatrix(glm::mat4x4& viewMatrix)
+glm::mat4x4 Camera::GetViewProjectionMatrix()
 {
-	viewMatrix = m_viewMatrix;
-	return;
+	return m_projectionMatrix * m_viewMatrix;
 }
 
 }
