@@ -9,17 +9,36 @@ VKRenderer::VKRenderer() {};
 
 VKRenderer::~VKRenderer()
 {
-	//vkDestroyInstance(m_instance, nullptr);
+	vkDestroyInstance(m_instance, nullptr);
 };
 
-bool VKRenderer::CheckValidationLayerSupport()
-{
+bool VKRenderer::CheckValidationLayerSupport() {
+	uint32_t layerCount;
+	vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
+
+	std::vector<VkLayerProperties> availableLayers(layerCount);
+	vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
+
+	for (const char* layerName : m_validationLayers) {
+		bool layerFound = false;
+
+		for (const auto& layerProperties : availableLayers) {
+			if (strcmp(layerName, layerProperties.layerName) == 0) {
+				layerFound = true;
+				break;
+			}
+		}
+
+		if (!layerFound) {
+			return false;
+		}
+	}
+
 	return true;
 }
 
 bool VKRenderer::CreateInstance()
 {
-/*
     VkApplicationInfo appInfo = {};
 	appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
 	appInfo.pApplicationName = "Hello Triangle";
@@ -34,10 +53,21 @@ bool VKRenderer::CreateInstance()
 
 	createInfo.enabledLayerCount = 0;
 
+	if (m_enableValidationLayers && !CheckValidationLayerSupport()) {
+		throw std::runtime_error("validation layers requested, but not available!");
+	}
+
+	if (m_enableValidationLayers) {
+		createInfo.enabledLayerCount = static_cast<uint32_t>(m_validationLayers.size());
+		createInfo.ppEnabledLayerNames = m_validationLayers.data();
+	}
+	else {
+		createInfo.enabledLayerCount = 0;
+	}
+
 	if (vkCreateInstance(&createInfo, nullptr, &m_instance) != VK_SUCCESS) {
 		return false;
 	}
-*/
 	return true;
 }
 bool VKRenderer::SetupDebugCallback() {
