@@ -45,7 +45,7 @@ bool Application::Initialize()
 
 	m_input->Initialize();
 
-	if (!(m_renderer->Initialize(m_window->GetWidowWidth(), m_window->GetWidowHeight())))
+	if (!(m_renderer->Initialize(m_window->GetNativeWindow(), m_window->GetWidowWidth(), m_window->GetWidowHeight())))
 	{
 		LogInfo("Init renderer failed.");
 		return false;

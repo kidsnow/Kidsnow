@@ -10,6 +10,8 @@
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
+#define CHECKRESULT(a) if(!a) return false;
+
 #ifdef _WIN32
 
 #ifdef _DEBUG

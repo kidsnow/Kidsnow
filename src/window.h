@@ -11,7 +11,7 @@ class Window {
 public:
 	Window(std::string windowName, int width, int height) :
 		m_windowName(windowName), m_width(width), m_height(height) {}
-	~Window() {}
+	virtual ~Window() {}
 
 public:
     virtual bool Initialize() = 0;
@@ -22,6 +22,7 @@ protected:
 	virtual void Greetings() = 0;
 
 public:
+	inline GLFWwindow* GetNativeWindow() { return m_window; }
 	inline int GetWidowWidth() { return m_width; }
 	inline int GetWidowHeight() { return m_height; }
 

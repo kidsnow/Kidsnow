@@ -3,6 +3,7 @@
 #include "renderer.h"
 #include "vkcommon.h"
 
+#include <iostream>
 #include <vector>
 
 namespace kidsnow {
@@ -14,7 +15,7 @@ public:
 	~VKRenderer();
 
 public:
-	virtual bool Initialize(int width, int height);
+	virtual bool Initialize(GLFWwindow* nativeWindow, int width, int height);
 	virtual void Render(Input* input);
 
 private:
@@ -23,14 +24,41 @@ private:
 	};
 	const bool m_enableValidationLayers = true;
 	VkInstance m_instance;
+	VkDebugUtilsMessengerEXT m_debugMessenger;
+	VkPhysicalDevice m_physicalDevice = VK_NULL_HANDLE;
+	VkDevice m_device;
+	VkQueue m_graphicsQueue;
+	VkSurfaceKHR m_surface;
 
 private:
 	bool CheckValidationLayerSupport();
+	std::vector<const char*> GetRequiredExtensions();
+	VkResult CreateDebugUtilsMessengerEXT(
+		VkInstance instance,
+		const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
+		const VkAllocationCallbacks* pAllocator,
+		VkDebugUtilsMessengerEXT* pDebugMessenger);
+	void DestroyDebugUtilsMessengerEXT(
+		VkInstance instance,
+		VkDebugUtilsMessengerEXT debugMessenger,
+		const VkAllocationCallbacks* pAllocator);
+	static VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(
+		VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
+		VkDebugUtilsMessageTypeFlagsEXT messageType,
+		const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
+		void* pUserData) {
+		std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
+		return VK_FALSE;
+	}
 	bool CreateInstance();
-	bool SetupDebugCallback();
-	bool CreateSurface();
+	bool SetupDebugMessenger();
+	bool CreateSurface(GLFWwindow* nativeWindow);
 	bool PickPhysicalDevice();
+	// Implement this method when you wanna filter physical devices.
+	bool IsDeviceSuitable(VkPhysicalDevice device);
+	int FindQueueFamilies(VkPhysicalDevice device);
 	bool CreateLogicalDevice();
+
 	bool CreateSwapChain();
 	bool CreateImageViews();
 	bool CreateRenderPass();
