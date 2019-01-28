@@ -19,8 +19,12 @@ public:
 	virtual void Render(Input* input);
 
 private:
+	uint32_t m_width, m_height;
 	const std::vector<const char*> m_validationLayers = {
 		"VK_LAYER_LUNARG_standard_validation"
+	};
+	const std::vector<const char*> deviceExtensions = {
+		VK_KHR_SWAPCHAIN_EXTENSION_NAME
 	};
 	const bool m_enableValidationLayers = true;
 	VkInstance m_instance;
@@ -31,6 +35,7 @@ private:
 	VkQueue m_presentQueue;
 	VkSurfaceKHR m_surface;
 
+private:
 	struct QueueFamilyIndices {
 		uint32_t graphicsFamily = UINT_MAX;
 		uint32_t presentFamily = UINT_MAX;
@@ -39,18 +44,25 @@ private:
 			return graphicsFamily != UINT_MAX && presentFamily != UINT_MAX;
 		}
 	};
+	struct SwapChainSupportDetails {
+		VkSurfaceCapabilitiesKHR capabilities;
+		std::vector<VkSurfaceFormatKHR> formats;
+		std::vector<VkPresentModeKHR> presentModes;
+	};
+
 private:
 	bool CheckValidationLayerSupport();
 	std::vector<const char*> GetRequiredExtensions();
+	bool CreateInstance();
 	VkResult CreateDebugUtilsMessengerEXT(
-		VkInstance instance,
-		const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
-		const VkAllocationCallbacks* pAllocator,
-		VkDebugUtilsMessengerEXT* pDebugMessenger);
+			VkInstance instance,
+			const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
+			const VkAllocationCallbacks* pAllocator,
+			VkDebugUtilsMessengerEXT* pDebugMessenger);
 	void DestroyDebugUtilsMessengerEXT(
-		VkInstance instance,
-		VkDebugUtilsMessengerEXT debugMessenger,
-		const VkAllocationCallbacks* pAllocator);
+			VkInstance instance,
+			VkDebugUtilsMessengerEXT debugMessenger,
+			const VkAllocationCallbacks* pAllocator);
 	static VKAPI_ATTR VkBool32 VKAPI_CALL DebugCallback(
 		VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
 		VkDebugUtilsMessageTypeFlagsEXT messageType,
@@ -59,16 +71,20 @@ private:
 		std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
 		return VK_FALSE;
 	}
-	bool CreateInstance();
 	bool SetupDebugMessenger();
 	bool CreateSurface(GLFWwindow* nativeWindow);
-	bool PickPhysicalDevice();
+	bool CheckDeviceExtensionSupport(VkPhysicalDevice device);
+	SwapChainSupportDetails QuerySwapChainSupport(VkPhysicalDevice device);
 	// Implement this method when you wanna filter physical devices.
 	bool IsDeviceSuitable(VkPhysicalDevice device);
+	bool PickPhysicalDevice();
 	QueueFamilyIndices FindQueueFamilies(VkPhysicalDevice device);
 	bool CreateLogicalDevice();
-
+	VkSurfaceFormatKHR ChooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats);
+	VkPresentModeKHR ChooseSwapPresentMode(const std::vector<VkPresentModeKHR> availablePresentModes);
+	VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 	bool CreateSwapChain();
+
 	bool CreateImageViews();
 	bool CreateRenderPass();
 	bool CreateGraphicsPipeline();
