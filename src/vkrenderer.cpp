@@ -1,5 +1,5 @@
 #include "vkrenderer.h"
-#include <vector>
+#include <set>
 
 #include "logger.h"
 
@@ -109,7 +109,8 @@ std::vector<const char*> VKRenderer::GetRequiredExtensions() {
 	std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
 
 	if (m_enableValidationLayers) {
-		extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+		// No debug utilitiy extension in Intel HD Graphics 530 driver.
+		// extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
 	}
 
 	return extensions;
@@ -183,16 +184,14 @@ bool VKRenderer::IsDeviceSuitable(VkPhysicalDevice device) {
 	return deviceProperties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU &&
 		deviceFeatures.geometryShader;
 	*/
-	if (FindQueueFamilies(device) >= 0)
-		return true;
+	QueueFamilyIndices indices = FindQueueFamilies(device);
 
-	return false;
+	return indices.IsComplete();
 }
 
-int VKRenderer::FindQueueFamilies(VkPhysicalDevice device)
+VKRenderer::QueueFamilyIndices VKRenderer::FindQueueFamilies(VkPhysicalDevice device)
 {
-	uint32_t graphicsFamilyIndex = 0;
-	uint32_t presentFamilyIndex = 0;
+	QueueFamilyIndices indices;
 
 	uint32_t queueFamilyCount = 0;
 	vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
@@ -203,38 +202,51 @@ int VKRenderer::FindQueueFamilies(VkPhysicalDevice device)
 	int i = 0;
 	for (const auto& queueFamily : queueFamilies) {
 		if (queueFamily.queueCount > 0 && queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
-			graphicsFamilyIndex = i;
+			indices.graphicsFamily = i;
 		}
 
-		/*VkBool32 presentSupport = false;
-		vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
+		VkBool32 presentSupport = false;
+		vkGetPhysicalDeviceSurfaceSupportKHR(device, i, m_surface, &presentSupport);
 		if (queueFamily.queueCount > 0 && presentSupport) {
 			indices.presentFamily = i;
-		}*/
+		}
+
+		if (indices.IsComplete()) {
+			break;
+		}
 
 		i++;
 	}
 
-	return -1;
+	return indices;
 }
 
 bool VKRenderer::CreateLogicalDevice() {
-	int index = FindQueueFamilies(m_physicalDevice);
+	QueueFamilyIndices indices = FindQueueFamilies(m_physicalDevice);
 
-	VkDeviceQueueCreateInfo queueCreateInfo = {};
-	queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-	queueCreateInfo.queueFamilyIndex = index;
-	queueCreateInfo.queueCount = 1;
-
+	std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
+	std::set<uint32_t> uniqueQueueFamilies = { indices.graphicsFamily, indices.presentFamily };
+	
 	float queuePriority = 1.0f;
-	queueCreateInfo.pQueuePriorities = &queuePriority;
+	for (uint32_t queueFamily : uniqueQueueFamilies) {
+		VkDeviceQueueCreateInfo queueCreateInfo = {};
+		queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+		queueCreateInfo.queueFamilyIndex = queueFamily;
+		queueCreateInfo.queueCount = 1;
+		queueCreateInfo.pQueuePriorities = &queuePriority;
+		queueCreateInfos.push_back(queueCreateInfo);
+	}
 
 	VkPhysicalDeviceFeatures deviceFeatures = {};
+
 	VkDeviceCreateInfo createInfo = {};
 	createInfo.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-	createInfo.pQueueCreateInfos = &queueCreateInfo;
-	createInfo.queueCreateInfoCount = 1;
+
+	createInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
+	createInfo.pQueueCreateInfos = queueCreateInfos.data();
+
 	createInfo.pEnabledFeatures = &deviceFeatures;
+
 	createInfo.enabledExtensionCount = 0;
 
 	if (m_enableValidationLayers) {
@@ -249,7 +261,8 @@ bool VKRenderer::CreateLogicalDevice() {
 		throw std::runtime_error("failed to create logical device!");
 	}
 
-	vkGetDeviceQueue(m_device, index, 0, &m_graphicsQueue);
+	vkGetDeviceQueue(m_device, indices.graphicsFamily, 0, &m_graphicsQueue);
+	vkGetDeviceQueue(m_device, indices.presentFamily, 0, &m_presentQueue);
 
 	return true;
 }
@@ -282,7 +295,7 @@ bool VKRenderer::CreateSyncObjects() {
 bool VKRenderer::Initialize(GLFWwindow* nativeWindow, int width, int height)
 {
 	CHECKRESULT(CreateInstance());
-	CHECKRESULT(SetupDebugMessenger());
+	SetupDebugMessenger();
 	CHECKRESULT(CreateSurface(nativeWindow));
 	CHECKRESULT(PickPhysicalDevice());
 	CHECKRESULT(CreateLogicalDevice());

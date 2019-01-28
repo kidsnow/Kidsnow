@@ -28,8 +28,17 @@ private:
 	VkPhysicalDevice m_physicalDevice = VK_NULL_HANDLE;
 	VkDevice m_device;
 	VkQueue m_graphicsQueue;
+	VkQueue m_presentQueue;
 	VkSurfaceKHR m_surface;
 
+	struct QueueFamilyIndices {
+		uint32_t graphicsFamily = UINT_MAX;
+		uint32_t presentFamily = UINT_MAX;
+
+		bool IsComplete() {
+			return graphicsFamily != UINT_MAX && presentFamily != UINT_MAX;
+		}
+	};
 private:
 	bool CheckValidationLayerSupport();
 	std::vector<const char*> GetRequiredExtensions();
@@ -56,7 +65,7 @@ private:
 	bool PickPhysicalDevice();
 	// Implement this method when you wanna filter physical devices.
 	bool IsDeviceSuitable(VkPhysicalDevice device);
-	int FindQueueFamilies(VkPhysicalDevice device);
+	QueueFamilyIndices FindQueueFamilies(VkPhysicalDevice device);
 	bool CreateLogicalDevice();
 
 	bool CreateSwapChain();
