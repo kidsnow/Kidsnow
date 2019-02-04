@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 namespace kidsnow {
 
@@ -15,40 +16,70 @@ public:
 	~VKRenderer();
 
 public:
-	virtual bool Initialize(GLFWwindow* nativeWindow, int width, int height);
+	virtual bool Initialize(GLFWwindow* nativeWindow);
 	virtual void Render(Input* input);
 
 private:
-	uint32_t m_width, m_height;
-	const std::vector<const char*> m_validationLayers = {
+	GLFWwindow* m_nativeWindow;
+
+	const int MAX_FRAMES_IN_FLIGHT = 2;
+
+	const std::vector<const char*> m_validationLayers =
+	{
 		"VK_LAYER_LUNARG_standard_validation"
 	};
-	const std::vector<const char*> deviceExtensions = {
+	
+	const std::vector<const char*> deviceExtensions =
+	{
 		VK_KHR_SWAPCHAIN_EXTENSION_NAME
 	};
+	
 	const bool m_enableValidationLayers = true;
+
 	VkInstance m_instance;
 	VkDebugUtilsMessengerEXT m_debugMessenger;
+	VkSurfaceKHR m_surface;
+
 	VkPhysicalDevice m_physicalDevice = VK_NULL_HANDLE;
 	VkDevice m_device;
+
 	VkQueue m_graphicsQueue;
 	VkQueue m_presentQueue;
-	VkSurfaceKHR m_surface;
+	
 	VkSwapchainKHR m_swapChain;
 	std::vector<VkImage> m_swapChainImages;
 	VkFormat m_swapChainImageFormat;
 	VkExtent2D m_swapChainExtent;
+	std::vector<VkImageView> m_swapChainImageViews;
+	std::vector<VkFramebuffer> m_swapChainFramebuffers;
+
+	VkRenderPass m_renderPass;
+	VkPipelineLayout m_pipelineLayout;
+	VkPipeline m_graphicsPipeline;
+
+	VkCommandPool m_commandPool;
+	std::vector<VkCommandBuffer> m_commandBuffers;
+
+	std::vector<VkSemaphore> m_imageAvailableSemaphores;
+	std::vector<VkSemaphore> m_renderFinishedSemaphores;
+	std::vector<VkFence> m_inFlightFences;
+	size_t m_currentFrame = 0;
+
+	bool m_framebufferResized = false;
 
 private:
-	struct QueueFamilyIndices {
+	struct QueueFamilyIndices
+	{
 		uint32_t graphicsFamily = UINT_MAX;
 		uint32_t presentFamily = UINT_MAX;
 
-		bool IsComplete() {
+		bool IsComplete()
+		{
 			return graphicsFamily != UINT_MAX && presentFamily != UINT_MAX;
 		}
 	};
-	struct SwapChainSupportDetails {
+	struct SwapChainSupportDetails
+	{
 		VkSurfaceCapabilitiesKHR capabilities;
 		std::vector<VkSurfaceFormatKHR> formats;
 		std::vector<VkPresentModeKHR> presentModes;
@@ -71,7 +102,8 @@ private:
 		VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
 		VkDebugUtilsMessageTypeFlagsEXT messageType,
 		const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
-		void* pUserData) {
+		void* pUserData)
+	{
 		std::cerr << "validation layer: " << pCallbackData->pMessage << std::endl;
 		return VK_FALSE;
 	}
@@ -88,14 +120,35 @@ private:
 	VkPresentModeKHR ChooseSwapPresentMode(const std::vector<VkPresentModeKHR> availablePresentModes);
 	VkExtent2D ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 	bool CreateSwapChain();
-
 	bool CreateImageViews();
 	bool CreateRenderPass();
+	static std::vector<char> ReadFile(const std::string& filename)
+	{
+		std::ifstream file(filename, std::ios::ate | std::ios::binary);
+
+		if (!file.is_open()) {
+			throw std::runtime_error("failed to open file!");
+		}
+
+		size_t fileSize = (size_t)file.tellg();
+		std::vector<char> buffer(fileSize);
+
+		file.seekg(0);
+		file.read(buffer.data(), fileSize);
+
+		file.close();
+
+		return buffer;
+	}
+	VkShaderModule CreateShaderModule(const std::vector<char>& code);
 	bool CreateGraphicsPipeline();
 	bool CreateFramebuffers();
 	bool CreateCommandPool();
 	bool CreateCommandBuffers();
 	bool CreateSyncObjects();
+	bool CleanupSwapChain();
+	bool Cleanup();
+	bool RecreateSwapChain();
 };
 
 }

@@ -12,7 +12,7 @@ public:
 	virtual ~Renderer() {};
 
 public:
-	virtual bool Initialize(GLFWwindow* window, int width, int height) = 0;
+	virtual bool Initialize(GLFWwindow* window) = 0;
     virtual void Render(Input* input) = 0;
 };
 

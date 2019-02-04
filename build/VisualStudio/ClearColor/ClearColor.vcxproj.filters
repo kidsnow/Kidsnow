@@ -145,5 +145,11 @@
     <None Include="..\..\..\src\resource\simple.vert">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\..\..\src\resource\triangle.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\src\resource\triangle.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

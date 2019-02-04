@@ -25,7 +25,7 @@ GLRenderer::~GLRenderer()
 	delete m_simpleShader;
 }
 
-bool GLRenderer::Initialize(GLFWwindow* nativeWindow, int width, int height)
+bool GLRenderer::Initialize(GLFWwindow* nativeWindow)
 {
 	gladLoadGL();
 

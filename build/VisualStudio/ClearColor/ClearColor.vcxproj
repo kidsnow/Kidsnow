@@ -61,6 +61,8 @@
   <ItemGroup>
     <None Include="..\..\..\src\resource\simple.frag" />
     <None Include="..\..\..\src\resource\simple.vert" />
+    <None Include="..\..\..\src\resource\triangle.frag" />
+    <None Include="..\..\..\src\resource\triangle.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

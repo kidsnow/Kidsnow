@@ -16,7 +16,7 @@ public:
 	~GLRenderer();
 
 public:
-	bool Initialize(GLFWwindow* nativeWindow, int width, int height);
+	bool Initialize(GLFWwindow* nativeWindow);
 	void Render(Input* input);
 
 private:

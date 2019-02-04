@@ -4,6 +4,7 @@ Makefile
 *.cmake
 
 bin/
+glslangValidator.exe
 
 # No rule for ignore .DS_Store from gitignore.io generated .gitignore file.
 .DS_Store
