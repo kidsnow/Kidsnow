@@ -2,15 +2,17 @@
 #include "logger.h"
 
 #include "kidsnow.h"
-#include "rendererfactory.h"
-#include "windowfactory.h"
+//#include "rendererfactory.h"
+//#include "windowfactory.h"
+#include "window.h"
 #include "input.h"
 
 namespace kidsnow {
 
 Application::Application(std::string appName, int width, int height)
 {
-    m_appName = appName;
+	m_window = new Window(appName, width, height);
+    /*m_appName = appName;
 
 	WindowFactory* windowFactory = new WindowFactory();
 	m_window = windowFactory->GetWindow(m_appName, width, height, SupportedAPI::VULKAN);
@@ -24,20 +26,21 @@ Application::Application(std::string appName, int width, int height)
 	if (m_renderer == nullptr)
 		exit(0);
 
-	m_input = new Input();
+	m_input = new Input();*/
 }
 
 Application::~Application()
 {
-	delete m_window;
+	/*delete m_window;
 	delete m_input;
-	delete m_renderer;
+	delete m_renderer;*/
     LogInfo("Bye!");
 }
 
 bool Application::Initialize()
 {
-    if (!(m_window->Initialize()))
+	m_window->Initialize();
+    /*if (!(m_window->Initialize()))
     {
         LogInfo("Init window failed.");
         return false;
@@ -49,7 +52,7 @@ bool Application::Initialize()
 	{
 		LogInfo("Init renderer failed.");
 		return false;
-	}
+	}*/
 
     return true;
 }
@@ -58,7 +61,7 @@ void Application::Run()
 {
     while (!m_window->Finalize())
     {
-        m_renderer->Render(m_input);
+        //m_renderer->Render(m_input);
         m_window->Update(m_input);
     }
 }

@@ -18,7 +18,6 @@ public:
     void Run();
 
 private:
-    std::string m_appName;
     Window* m_window;
     Renderer* m_renderer;
 	Input *m_input;
