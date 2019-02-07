@@ -4,7 +4,7 @@
 namespace kidsnow {
 
 Window::Window(std::string windowName, int width, int height) :
-	m_windowName(windowName), m_width(width), m_height(height) {}
+	m_windowName(windowName), m_width(width), m_height(height), m_windowShouldClose(false) {}
 
 Window::~Window() {}
 
@@ -27,7 +27,7 @@ bool Window::Initialize()
 	windowFlags |= SDL_WINDOW_RESIZABLE;
 	windowFlags |= SDL_WINDOW_VULKAN;
 
-	m_window = SDL_CreateWindow(m_windowName.c_str(), 0, 0, m_width, m_height, windowFlags);
+	m_window = SDL_CreateWindow(m_windowName.c_str(), 100, 100, m_width, m_height, windowFlags);
 	if (m_window == NULL)
 	{
 		SDL_Log("Couldn't create window: %s\n", SDL_GetError());
@@ -50,12 +50,47 @@ bool Window::Initialize()
 
 void Window::Update(Input* input)
 {
+	SDL_Event event;
+
+	while (SDL_PollEvent(&event))
+	{
+		switch (event.type)
+		{
+		case SDL_WINDOWEVENT:
+			switch (event.window.event)
+			{
+			case SDL_WINDOWEVENT_CLOSE:
+				m_windowShouldClose = true;
+				break;
+			}
+			break;
+		case SDL_KEYDOWN:
+			bool withControl = !!(event.key.keysym.mod & KMOD_CTRL);
+			bool withShift = !!(event.key.keysym.mod & KMOD_SHIFT);
+			bool withAlt = !!(event.key.keysym.mod & KMOD_ALT);
+
+			switch (event.key.keysym.sym)
+			{
+			case SDLK_ESCAPE:
+				m_windowShouldClose = true;
+				break;
+			}
+
+			break;
+		}
+	}
+
 	return;
 }
 
 bool Window::Finalize()
 {
-	return true;
+	if (m_windowShouldClose)
+	{
+		return true;
+	}
+
+	return false;
 }
 
 void Window::Greetings()

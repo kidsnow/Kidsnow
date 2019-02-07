@@ -30,6 +30,7 @@ protected:
 	int m_width;
 	int m_height;
 	SDL_Window* m_window;
+	bool m_windowShouldClose;
 };
 
 } // end of kidsnoaw
