@@ -28,7 +28,7 @@ void SimpleGLShader::SetParameters(glm::mat4x4 MVPMat)
 void SimpleGLShader::Render()
 {
 	glUseProgram(m_program);
-	glProgramUniform4fv(m_program, m_MVPMatLoc, 1, &m_MVPMat[0][0]);
+	glProgramUniformMatrix4fv(m_program, m_MVPMatLoc, 1, GL_FALSE, &m_MVPMat[0][0]);
 }
 
 } // end of kidsnow
