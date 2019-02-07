@@ -59,10 +59,14 @@ bool Application::Initialize()
 
 void Application::Run()
 {
-    while (!m_window->Finalize())
+    while (true)
     {
         //m_renderer->Render(m_input);
         m_window->Update(m_input);
+		if (m_window->Finalize())
+		{
+			return;
+		}
     }
 }
 
