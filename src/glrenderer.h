@@ -12,14 +12,15 @@ class GLModel;
 class GLRenderer : public Renderer
 {
 public:
-	GLRenderer();
+	GLRenderer(SDL_Window*, SDL_GLContext);
 	~GLRenderer();
 
 public:
-	bool Initialize(GLFWwindow* nativeWindow);
+	bool Initialize();
 	void Render(Input* input);
 
 private:
+	SDL_GLContext m_context;
 	GLScene* m_scene;
 	GLShader* m_simpleShader;
 	GLModel* m_model;

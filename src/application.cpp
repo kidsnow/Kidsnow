@@ -2,32 +2,14 @@
 #include "logger.h"
 
 #include "kidsnow.h"
-//#include "rendererfactory.h"
-//#include "windowfactory.h"
-#include "window.h"
+#include "windowfactory.h"
+#include "renderer.h"
 #include "input.h"
 
 namespace kidsnow {
 
-Application::Application(std::string appName, int width, int height)
-{
-	m_window = new Window(appName, width, height);
-    /*m_appName = appName;
-
-	WindowFactory* windowFactory = new WindowFactory();
-	m_window = windowFactory->GetWindow(m_appName, width, height, SupportedAPI::VULKAN);
-
-	if (m_window == nullptr)
-		exit(0);
-
-	RendererFactory* rendererFactory = new RendererFactory();
-    m_renderer = rendererFactory->GetRenderer(SupportedAPI::VULKAN);
-
-	if (m_renderer == nullptr)
-		exit(0);
-
-	m_input = new Input();*/
-}
+Application::Application(std::string appName, int posX, int posY, int width, int height)
+	: m_appName(appName), m_posX(posX), m_posY(posY), m_width(width), m_height(height) {}
 
 Application::~Application()
 {
@@ -39,20 +21,24 @@ Application::~Application()
 
 bool Application::Initialize()
 {
-	m_window->Initialize();
-    /*if (!(m_window->Initialize()))
-    {
-        LogInfo("Init window failed.");
-        return false;
-    }
-
-	m_input->Initialize();
-
-	if (!(m_renderer->Initialize(m_window->GetNativeWindow())))
+	WindowFactory* windowFactory = new WindowFactory();
+	m_window = windowFactory->GetWindow(m_appName, m_posX, m_posY, m_width, m_height, SupportedAPI::OPENGL);
+	if (m_window == nullptr)
 	{
-		LogInfo("Init renderer failed.");
 		return false;
-	}*/
+	}
+	delete windowFactory;
+	m_window->Initialize();
+
+	m_renderer = m_window->GenerateRenderer();
+	if (m_renderer == nullptr)
+	{
+		return false;
+	}
+	m_renderer->Initialize();
+
+	m_input = new Input();
+	m_input->Initialize();
 
     return true;
 }
@@ -61,7 +47,7 @@ void Application::Run()
 {
     while (true)
     {
-        //m_renderer->Render(m_input);
+        m_renderer->Render(m_input);
         m_window->Update(m_input);
 		if (m_window->Finalize())
 		{

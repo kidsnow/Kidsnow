@@ -6,19 +6,21 @@
 namespace kidsnow {
 
 class Input;
+class Renderer;
 
 class Window {
 public:
-	Window(std::string windowName, int width, int height);
+	Window(uint32_t graphicsAPI, std::string windowName, int posX, int posY, int width, int height);
 	virtual ~Window();
 
 public:
 	virtual bool Initialize();
 	virtual void Update(Input*);
 	virtual bool Finalize();
+	virtual Renderer* GenerateRenderer() = 0;
 
 protected:
-	virtual void Greetings();
+	virtual void Greetings() = 0;
 
 public:
 	inline SDL_Window* GetNativeWindow() { return m_window; }
@@ -26,9 +28,10 @@ public:
 	inline int GetWidowHeight() { return m_height; }
 
 protected:
+	uint32_t m_graphicsAPI;
 	std::string m_windowName;
-	int m_width;
-	int m_height;
+	int m_posX, m_posY;
+	int m_width, m_height;
 	SDL_Window* m_window;
 	bool m_windowShouldClose;
 };

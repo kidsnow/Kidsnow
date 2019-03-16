@@ -12,15 +12,15 @@ namespace kidsnow {
 class VKRenderer : public Renderer
 {
 public:
-	VKRenderer();
+	VKRenderer(SDL_Window* window);
 	~VKRenderer();
 
 public:
-	virtual bool Initialize(GLFWwindow* nativeWindow);
+	virtual bool Initialize();
 	virtual void Render(Input* input);
 
 private:
-	GLFWwindow* m_nativeWindow;
+	SDL_Window* m_window;
 
 	const int MAX_FRAMES_IN_FLIGHT = 2;
 
@@ -108,7 +108,7 @@ private:
 		return VK_FALSE;
 	}
 	bool SetupDebugMessenger();
-	bool CreateSurface(GLFWwindow* nativeWindow);
+	bool CreateSurface();
 	bool CheckDeviceExtensionSupport(VkPhysicalDevice device);
 	SwapChainSupportDetails QuerySwapChainSupport(VkPhysicalDevice device);
 	// Implement this method when you wanna filter physical devices.

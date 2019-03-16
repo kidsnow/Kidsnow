@@ -9,7 +9,8 @@
 
 namespace kidsnow {
 
-GLRenderer::GLRenderer()
+GLRenderer::GLRenderer(SDL_Window* window, SDL_GLContext context)
+	: Renderer(window), m_context(context)
 {
 	m_scene = new GLScene();
 	m_simpleShader = new SimpleGLShader();
@@ -25,9 +26,9 @@ GLRenderer::~GLRenderer()
 	delete m_simpleShader;
 }
 
-bool GLRenderer::Initialize(GLFWwindow* nativeWindow)
+bool GLRenderer::Initialize()
 {
-	gladLoadGL();
+	SDL_GL_MakeCurrent(m_window, m_context);
 
 	if (!m_simpleShader->Initialize("resource/simple.vert", "resource/simple.frag")) return false;
 	if (!m_model->Initialize()) return false;

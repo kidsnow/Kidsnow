@@ -3,8 +3,8 @@
 
 namespace kidsnow {
 
-Window::Window(std::string windowName, int width, int height) :
-	m_windowName(windowName), m_width(width), m_height(height), m_windowShouldClose(false) {}
+Window::Window(uint32_t graphicsAPI, std::string windowName, int posX, int posY, int width, int height) :
+	m_graphicsAPI(graphicsAPI), m_windowName(windowName), m_posX(posX), m_posY(posY), m_width(width), m_height(height), m_windowShouldClose(false) {}
 
 Window::~Window() {}
 
@@ -25,9 +25,9 @@ bool Window::Initialize()
 
 	windowFlags = 0;
 	windowFlags |= SDL_WINDOW_RESIZABLE;
-	windowFlags |= SDL_WINDOW_VULKAN;
+	windowFlags |= m_graphicsAPI;
 
-	m_window = SDL_CreateWindow(m_windowName.c_str(), 100, 100, m_width, m_height, windowFlags);
+	m_window = SDL_CreateWindow(m_windowName.c_str(), m_posX, m_posY, m_width, m_height, windowFlags);
 	if (m_window == NULL)
 	{
 		SDL_Log("Couldn't create window: %s\n", SDL_GetError());
@@ -80,22 +80,20 @@ void Window::Update(Input* input)
 		}
 	}
 
+	SDL_GL_SwapWindow(m_window);
+
 	return;
 }
 
 bool Window::Finalize()
 {
-	if (m_windowShouldClose)
+	if (!m_windowShouldClose)
 	{
-		return true;
+		return false;
 	}
 
-	return false;
-}
-
-void Window::Greetings()
-{
-	return;
+	SDL_DestroyWindow(m_window);
+	return true;
 }
 
 } // end of kidsnow

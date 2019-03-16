@@ -4,18 +4,23 @@
 
 namespace kidsnow {
 
+class Renderer;
+
 class GLWindow : public Window {
 public:
-	GLWindow(std::string windowName, int width, int height);
+	GLWindow(std::string windowName, int posX, int posY, int width, int height);
 	~GLWindow();
 
 public:
 	virtual bool Initialize();
-	virtual void Update(Input*);
 	virtual bool Finalize();
+	virtual Renderer* GenerateRenderer();
 
 private:
 	virtual void Greetings();
+
+private:
+	SDL_GLContext m_context;
 };
 
 } // end of kidsnow

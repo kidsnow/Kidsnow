@@ -1,68 +1,75 @@
 #include "glwindow.h"
+#include "glrenderer.h"
+#include "input.h"
 #include "logger.h"
 
-#include "input.h"
+#include "glad/glad.h"
 
 namespace kidsnow {
 
-GLWindow::GLWindow(std::string windowName, int width, int height)
-	: Window(windowName, width, height) {}
+GLWindow::GLWindow(std::string windowName, int posX, int posY, int width, int height)
+	: Window(SDL_WINDOW_OPENGL, windowName, posX, posY, width, height) {}
 
 GLWindow::~GLWindow() {}
 
-
 bool GLWindow::Initialize()
 {
-	if (!glfwInit())
+	if (Window::Initialize())
 	{
-		LogDebug("GLFW initialize failed!");
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+
+		m_context = SDL_GL_CreateContext(m_window);
+		if (!m_context)
+		{
+			LogDebug("Failed to create GL context.");
+			SDL_DestroyWindow(m_window);
+			SDL_Quit();
+			return false;
+		}
+
+		if (!gladLoadGLLoader(SDL_GL_GetProcAddress))
+		{
+			LogDebug("Failed to initialize GLAD.");
+			return false;
+		}
+		Greetings();
+
+		SDL_GL_MakeCurrent(m_window, NULL);
+
+		return true;
+	}
+
+	return false;
+}
+
+bool GLWindow::Finalize()
+{
+	if (!Window::Finalize())
+	{
 		return false;
 	}
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	m_window = glfwCreateWindow(m_width, m_height, m_windowName.c_str(), NULL, NULL);
-	if (!m_window)
-	{
-		LogDebug("Failed to create GLFW window.");
-		glfwTerminate();
-		return false;
-	}
-
-	glfwMakeContextCurrent(m_window);
-
-	Greetings();
-
+	SDL_GL_DeleteContext(m_context);
+	SDL_Quit();
 	return true;
 }
 
 void GLWindow::Greetings()
 {
-	std::cout << "******************************************************************\n";
-	std::cout << "    OpenGL Framework by Kidsnow\n";
-	std::cout << "    OpenGL Version: " << glGetString(GL_VERSION) << "\n";
-	std::cout << "    GLFW Version: " << glfwGetVersionString() << "\n";
-	std::cout << "******************************************************************\n";
+	LogInfo(glGetString(GL_VENDOR));
+	LogInfo(glGetString(GL_RENDERER));
+	LogInfo(glGetString(GL_VERSION));
+
+	return;
 }
 
-void GLWindow::Update(Input* input)
+Renderer* GLWindow::GenerateRenderer()
 {
-	glfwSwapBuffers(m_window);
-	glfwPollEvents();
-}
-
-bool GLWindow::Finalize()
-{
-	if (glfwWindowShouldClose(m_window))
-	{
-		glfwDestroyWindow(m_window);
-		glfwTerminate();
-		return true;
-	}
-
-	return false;
+	GLRenderer* renderer = new GLRenderer(m_window, m_context);
+	
+	return renderer;
 }
 
 } // end of kidsnow

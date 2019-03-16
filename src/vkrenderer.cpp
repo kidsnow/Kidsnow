@@ -6,7 +6,8 @@
 
 namespace kidsnow {
 
-VKRenderer::VKRenderer() {}
+VKRenderer::VKRenderer(SDL_Window* window)
+	: Renderer(window) {}
 
 VKRenderer::~VKRenderer()
 {
@@ -39,16 +40,18 @@ bool VKRenderer::CheckValidationLayerSupport() {
 }
 
 std::vector<const char*> VKRenderer::GetRequiredExtensions() {
-	uint32_t glfwExtensionCount = 0;
+	/*uint32_t glfwExtensionCount = 0;
 	const char** glfwExtensions;
 	glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
 
-	std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);
+	std::vector<const char*> extensions(glfwExtensions, glfwExtensions + glfwExtensionCount);*/
 
 	if (m_enableValidationLayers) {
 		// No debug utilitiy extension in Intel HD Graphics 530 driver.
 		// extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
 	}
+
+	std::vector<const char*> extensions;
 
 	return extensions;
 }
@@ -125,10 +128,13 @@ bool VKRenderer::SetupDebugMessenger() {
 	return true;
 }
 
-bool VKRenderer::CreateSurface(GLFWwindow* nativeWindow) {
+bool VKRenderer::CreateSurface() {
 	VkWin32SurfaceCreateInfoKHR createInfo = {};
 	createInfo.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
-	createInfo.hwnd = glfwGetWin32Window(nativeWindow);
+	SDL_SysWMinfo wmInfo;
+	SDL_GetWindowWMInfo(m_window, &wmInfo);
+	HWND hwnd = wmInfo.info.win.window;
+	createInfo.hwnd = hwnd;
 	createInfo.hinstance = GetModuleHandle(nullptr);
 
 	if (vkCreateWin32SurfaceKHR(m_instance, &createInfo, nullptr, &m_surface) != VK_SUCCESS) {
@@ -348,7 +354,6 @@ VkExtent2D VKRenderer::ChooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabili
 	}
 	else {
 		int width, height;
-		glfwGetFramebufferSize(m_nativeWindow, &width, &height);
 
 		VkExtent2D actualExtent = { width, height };
 
@@ -738,12 +743,11 @@ bool VKRenderer::CreateSyncObjects() {
 	return true;
 }
 
-bool VKRenderer::Initialize(GLFWwindow* nativeWindow)
+bool VKRenderer::Initialize()
 {
-	m_nativeWindow = nativeWindow;
 	CHECKRESULT(CreateInstance());
 	SetupDebugMessenger();
-	CHECKRESULT(CreateSurface(nativeWindow));
+	CHECKRESULT(CreateSurface());
 	CHECKRESULT(PickPhysicalDevice());
 	CHECKRESULT(CreateLogicalDevice());
 	CHECKRESULT(CreateSwapChain());
@@ -809,8 +813,7 @@ bool VKRenderer::RecreateSwapChain()
 {
 	int width = 0, height = 0;
 	while (width == 0 || height == 0) {
-		glfwGetFramebufferSize(m_nativeWindow, &width, &height);
-		glfwWaitEvents();
+		
 	}
 
 	vkDeviceWaitIdle(m_device);

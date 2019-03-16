@@ -10,7 +10,7 @@ class Input;
 
 class Application {
 public:
-    Application(std::string appName, int width, int height);
+    Application(std::string appName, int posX, int posY, int width, int height);
     ~Application();
 
 public:
@@ -18,6 +18,8 @@ public:
     void Run();
 
 private:
+	std::string m_appName;
+	int m_posX, m_posY, m_width, m_height;
     Window* m_window;
     Renderer* m_renderer;
 	Input *m_input;
