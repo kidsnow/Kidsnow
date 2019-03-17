@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    kidsnow::Application* app = new kidsnow::Application("Hello", 100, 100, 640, 480);
+    kidsnow::Application* app = new kidsnow::Application("Hello", 100, 100, 1440, 810);
 	
 	if (!app->Initialize())
 		return 0;

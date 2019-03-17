@@ -88,6 +88,8 @@ void GLRenderer::Render(Camera* camera,Input* input)
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
+	m_shader->SetMatrix4("MVP", camera->GetViewProjectionMatrix());
+
 	m_shader->Use();
 
 	glDrawArrays(GL_TRIANGLES, 0, 6);

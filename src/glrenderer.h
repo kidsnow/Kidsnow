@@ -19,7 +19,6 @@ public:
 
 private:
 	SDL_GLContext m_context;
-	Camera* m_camera;
 	GLShader* m_shader;
 
 	GLfloat* m_rectangleVertices;
