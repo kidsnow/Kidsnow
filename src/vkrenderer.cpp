@@ -2,7 +2,9 @@
 #include <set>
 #include <algorithm>
 
-#include "logger.h"
+#include "camera.h"
+#include "input.h"
+#include "utilities.h"
 
 namespace kidsnow {
 
@@ -830,7 +832,7 @@ bool VKRenderer::RecreateSwapChain()
 	return true;
 }
 
-void VKRenderer::Render(Input* input)
+void VKRenderer::Render(Camera* camera, Input* input)
 {
 	vkWaitForFences(m_device, 1, &m_inFlightFences[m_currentFrame], VK_TRUE, std::numeric_limits<uint64_t>::max());
 

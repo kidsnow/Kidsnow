@@ -1,13 +1,11 @@
 #pragma once
 
 #include "renderer.h"
+#include "glcommon.h"
 
 namespace kidsnow {
 
-class GLScene;
-class Camera;
 class GLShader;
-class GLModel;
 
 class GLRenderer : public Renderer
 {
@@ -17,14 +15,16 @@ public:
 
 public:
 	bool Initialize();
-	void Render(Input* input);
+	void Render(Camera* camera, Input* input);
 
 private:
 	SDL_GLContext m_context;
-	GLScene* m_scene;
-	GLShader* m_simpleShader;
-	GLModel* m_model;
 	Camera* m_camera;
+	GLShader* m_shader;
+
+	GLfloat* m_rectangleVertices;
+	GLuint m_rectangleVAO;
+	GLuint m_texture;
 
 private:
 	const float GRIDLENGTH = 100.0f;

@@ -17,7 +17,7 @@ public:
 
 public:
 	virtual bool Initialize();
-	virtual void Render(Input* input);
+	virtual void Render(Camera* camera, Input* input);
 
 private:
 	SDL_Window* m_window;

@@ -1,7 +1,7 @@
 #include "vkwindow.h"
 #include "vkrenderer.h"
 #include "input.h"
-#include "logger.h"
+#include "utilities.h"
 
 
 namespace kidsnow {

@@ -2,7 +2,7 @@
 #include "glwindow.h"
 #include "vkwindow.h"
 #include "kidsnow.h"
-#include "logger.h"
+#include "utilities.h"
 
 namespace kidsnow {
 

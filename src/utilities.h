@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+namespace kidsnow {
+
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
 #define ANSI_COLOR_YELLOW  "\x1b[33m"
@@ -57,3 +59,8 @@
   }
 
 #endif
+
+unsigned char* LoadImageFile(const char* fileName, int& width, int& height);
+void FreeImageBuffer(unsigned char* data);
+
+}

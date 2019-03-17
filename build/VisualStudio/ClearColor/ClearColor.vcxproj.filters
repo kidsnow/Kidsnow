@@ -39,19 +39,7 @@
     <ClCompile Include="..\..\..\src\glrenderer.cpp">
       <Filter>Source Files\GL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\rendererfactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\simpleglshader.cpp">
-      <Filter>Source Files\GL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\textureglshader.cpp">
-      <Filter>Source Files\GL</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\glshader.cpp">
-      <Filter>Source Files\GL</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\glmodel.cpp">
       <Filter>Source Files\GL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\vkrenderer.cpp">
@@ -72,10 +60,10 @@
     <ClCompile Include="..\..\..\src\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\glscene.cpp">
-      <Filter>Source Files\GL</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,25 +80,10 @@
     <ClInclude Include="..\..\..\src\input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\logger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\glrenderer.h">
       <Filter>Header Files\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\rendererfactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\glmodel.h">
-      <Filter>Header Files\GL</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\glshader.h">
-      <Filter>Header Files\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\simpleglshader.h">
-      <Filter>Header Files\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\textureglshader.h">
       <Filter>Header Files\GL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\vkrenderer.h">
@@ -137,8 +110,8 @@
     <ClInclude Include="..\..\..\src\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\glscene.h">
-      <Filter>Header Files\GL</Filter>
+    <ClInclude Include="..\..\..\src\utilities.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -146,12 +119,6 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="..\..\..\src\resource\simple.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\..\src\resource\triangle.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\..\src\resource\triangle.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

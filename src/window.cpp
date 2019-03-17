@@ -48,6 +48,18 @@ bool Window::Initialize()
 	return true;
 }
 
+bool Window::Finalize()
+{
+	if (!m_windowShouldClose)
+	{
+		return false;
+	}
+
+	SDL_DestroyWindow(m_window);
+	SDL_Quit();
+	return true;
+}
+
 void Window::Update(Input* input)
 {
 	SDL_Event event;
@@ -83,17 +95,6 @@ void Window::Update(Input* input)
 	SDL_GL_SwapWindow(m_window);
 
 	return;
-}
-
-bool Window::Finalize()
-{
-	if (!m_windowShouldClose)
-	{
-		return false;
-	}
-
-	SDL_DestroyWindow(m_window);
-	return true;
 }
 
 } // end of kidsnow

@@ -1,7 +1,7 @@
 #include "glwindow.h"
 #include "glrenderer.h"
 #include "input.h"
-#include "logger.h"
+#include "utilities.h"
 
 #include "glad/glad.h"
 
@@ -52,7 +52,6 @@ bool GLWindow::Finalize()
 	}
 
 	SDL_GL_DeleteContext(m_context);
-	SDL_Quit();
 	return true;
 }
 

@@ -1,9 +1,10 @@
 #include "application.h"
-#include "logger.h"
+#include "utilities.h"
 
 #include "kidsnow.h"
 #include "windowfactory.h"
 #include "renderer.h"
+#include "camera.h"
 #include "input.h"
 
 namespace kidsnow {
@@ -13,9 +14,10 @@ Application::Application(std::string appName, int posX, int posY, int width, int
 
 Application::~Application()
 {
-	/*delete m_window;
 	delete m_input;
-	delete m_renderer;*/
+	delete m_camera;
+	delete m_renderer;
+	delete m_window;
     LogInfo("Bye!");
 }
 
@@ -28,14 +30,16 @@ bool Application::Initialize()
 		return false;
 	}
 	delete windowFactory;
-	m_window->Initialize();
+	CHECKRESULT(m_window->Initialize());
 
 	m_renderer = m_window->GenerateRenderer();
 	if (m_renderer == nullptr)
 	{
 		return false;
 	}
-	m_renderer->Initialize();
+	CHECKRESULT(m_renderer->Initialize());
+
+	m_camera = new Camera();
 
 	m_input = new Input();
 	m_input->Initialize();
@@ -47,7 +51,7 @@ void Application::Run()
 {
     while (true)
     {
-        m_renderer->Render(m_input);
+        m_renderer->Render(m_camera, m_input);
         m_window->Update(m_input);
 		if (m_window->Finalize())
 		{
