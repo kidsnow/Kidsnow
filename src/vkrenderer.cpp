@@ -832,7 +832,7 @@ bool VKRenderer::RecreateSwapChain()
 	return true;
 }
 
-void VKRenderer::Render(Camera* camera, Input* input)
+void VKRenderer::Render(Camera* camera)
 {
 	vkWaitForFences(m_device, 1, &m_inFlightFences[m_currentFrame], VK_TRUE, std::numeric_limits<uint64_t>::max());
 

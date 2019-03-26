@@ -68,7 +68,7 @@ void Camera::SetUp()
 	position = glm::vec4(m_positionX, m_positionY, m_positionZ, 1.0f);
 
 	// Setup where the camera is looking by default.
-	lookAt = glm::vec4(0.0f, 0.0f, 1.0f, 0.0f);
+	lookAt = glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
 
 	// Set the yaw (Y axis), pitch (X axis), and roll (Z axis) rotations in radians.
 	pitch = m_rotationX * 0.0174532925f;

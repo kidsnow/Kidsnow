@@ -3,7 +3,6 @@
 
 #include "glshader.h"
 #include "camera.h"
-#include "input.h"
 
 namespace kidsnow {
 
@@ -79,7 +78,7 @@ bool GLRenderer::Initialize()
 	return true;
 }
 
-void GLRenderer::Render(Camera* camera,Input* input)
+void GLRenderer::Render(Camera* camera)
 {
 	glClearColor(0.4f, 0.4f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);

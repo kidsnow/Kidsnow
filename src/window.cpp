@@ -63,6 +63,9 @@ bool Window::Finalize()
 void Window::Update(Input* input)
 {
 	SDL_Event event;
+	bool withControl = false;
+	bool withShift = false;
+	bool withAlt = false; 
 
 	while (SDL_PollEvent(&event))
 	{
@@ -77,14 +80,89 @@ void Window::Update(Input* input)
 			}
 			break;
 		case SDL_KEYDOWN:
-			bool withControl = !!(event.key.keysym.mod & KMOD_CTRL);
-			bool withShift = !!(event.key.keysym.mod & KMOD_SHIFT);
-			bool withAlt = !!(event.key.keysym.mod & KMOD_ALT);
+			withControl = !!(event.key.keysym.mod & KMOD_CTRL);
+			withShift = !!(event.key.keysym.mod & KMOD_SHIFT);
+			withAlt = !!(event.key.keysym.mod & KMOD_ALT);
+
+			if (withControl)
+			{
+				input->KeyDown(KEYVALUE::SPECIAL_CONTROL);
+			}
+			if (withShift)
+			{
+				input->KeyDown(KEYVALUE::SPECIAL_SHIFT);
+			}
+			if (withAlt)
+			{
+				input->KeyDown(KEYVALUE::SPECIAL_ALT);
+			}
 
 			switch (event.key.keysym.sym)
 			{
 			case SDLK_ESCAPE:
 				m_windowShouldClose = true;
+				break;
+			case SDLK_w:
+				input->KeyDown(KEYVALUE::KEY_W);
+				break;
+			case SDLK_a:
+				input->KeyDown(KEYVALUE::KEY_A);
+				break;
+			case SDLK_s:
+				input->KeyDown(KEYVALUE::KEY_S);
+				break;
+			case SDLK_d:
+				input->KeyDown(KEYVALUE::KEY_D);
+				break;
+			case SDLK_q:
+				input->KeyDown(KEYVALUE::KEY_Q);
+				break;
+			case SDLK_e:
+				input->KeyDown(KEYVALUE::KEY_E);
+				break;
+			}
+
+			break;
+		case SDL_KEYUP:
+			withControl = !!(event.key.keysym.mod & KMOD_CTRL);
+			withShift = !!(event.key.keysym.mod & KMOD_SHIFT);
+			withAlt = !!(event.key.keysym.mod & KMOD_ALT);
+
+			if (!withControl)
+			{
+				input->KeyUp(KEYVALUE::SPECIAL_CONTROL);
+			}
+			if (!withShift)
+			{
+				input->KeyUp(KEYVALUE::SPECIAL_SHIFT);
+			}
+			if (!withAlt)
+			{
+				input->KeyUp(KEYVALUE::SPECIAL_ALT);
+			}
+
+			switch (event.key.keysym.sym)
+			{
+			case SDLK_ESCAPE:
+				m_windowShouldClose = true;
+				break;
+			case SDLK_w:
+				input->KeyUp(KEYVALUE::KEY_W);
+				break;
+			case SDLK_a:
+				input->KeyUp(KEYVALUE::KEY_A);
+				break;
+			case SDLK_s:
+				input->KeyUp(KEYVALUE::KEY_S);
+				break;
+			case SDLK_d:
+				input->KeyUp(KEYVALUE::KEY_D);
+				break;
+			case SDLK_q:
+				input->KeyUp(KEYVALUE::KEY_Q);
+				break;
+			case SDLK_e:
+				input->KeyUp(KEYVALUE::KEY_E);
 				break;
 			}
 

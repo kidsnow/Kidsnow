@@ -32,26 +32,26 @@ void Input::Initialize()
 }
 
 
-void Input::KeyDown(unsigned int input)
+void Input::KeyDown(KEYVALUE input)
 {
 	// If a key is pressed then save that state in the key array.
-	m_keys[input] = true;
+	m_keys[(unsigned int)input] = true;
 	return;
 }
 
 
-void Input::KeyUp(unsigned int input)
+void Input::KeyUp(KEYVALUE input)
 {
 	// If a key is released then clear that state in the key array.
-	m_keys[input] = false;
+	m_keys[(unsigned int)input] = false;
 	return;
 }
 
 
-bool Input::IsKeyDown(unsigned int key)
+bool Input::IsKeyDown(KEYVALUE key)
 {
 	// Return what state the key is in (pressed/not pressed).
-	return m_keys[key];
+	return m_keys[(unsigned int)key];
 }
 
 }

@@ -15,7 +15,7 @@ public:
 
 public:
 	bool Initialize();
-	void Render(Camera* camera, Input* input);
+	void Render(Camera* camera);
 
 private:
 	SDL_GLContext m_context;

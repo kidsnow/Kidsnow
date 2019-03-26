@@ -16,6 +16,7 @@ public:
 
 public:
     bool Initialize();
+	void CameraControl();
     void Run();
 
 private:

@@ -6,7 +6,6 @@
 namespace kidsnow {
 
 class Camera;
-class Input;
 
 class Renderer {
 public:
@@ -15,7 +14,7 @@ public:
 
 public:
 	virtual bool Initialize() = 0;
-    virtual void Render(Camera* camera, Input* input) = 0;
+    virtual void Render(Camera* camera) = 0;
 
 protected:
 	SDL_Window* m_window;
