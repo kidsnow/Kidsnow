@@ -4,13 +4,13 @@
 
 namespace kidsnow {
 
-unsigned char* LoadImageFile(const char* fileName, int& width, int& height)
+unsigned char* loadImageFile(const char* fileName, int& width, int& height)
 {
 	int temp;
 	return stbi_load(fileName, &width, &height, &temp, 0);
 }
 
-void FreeImageBuffer(unsigned char* data)
+void freeImageBuffer(unsigned char* data)
 {
 	stbi_image_free(data);
 }

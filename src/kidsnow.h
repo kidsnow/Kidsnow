@@ -5,7 +5,7 @@ namespace kidsnow {
 enum class SupportedAPI
 {
 	OPENGL,
-	VULKAN,
+	//VULKAN,
 };
 
 } // end of kidsnow

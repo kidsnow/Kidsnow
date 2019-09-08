@@ -19,12 +19,6 @@
     <Filter Include="Header Files\GL">
       <UniqueIdentifier>{ef0c01ec-6e19-4f3a-b863-3fc0cb72f5aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\VK">
-      <UniqueIdentifier>{25cfeb21-17ec-4233-ab22-39941bd54e25}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\VK">
-      <UniqueIdentifier>{93ea1f2c-a7fb-4534-ac7a-6637092487e5}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\main.cpp">
@@ -42,17 +36,11 @@
     <ClCompile Include="..\..\..\src\glshader.cpp">
       <Filter>Source Files\GL</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\vkrenderer.cpp">
-      <Filter>Source Files\VK</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\glwindow.cpp">
       <Filter>Source Files\GL</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\windowfactory.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\vkwindow.cpp">
-      <Filter>Source Files\VK</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\glad.c">
       <Filter>Source Files\GL</Filter>
@@ -86,9 +74,6 @@
     <ClInclude Include="..\..\..\src\glshader.h">
       <Filter>Header Files\GL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\vkrenderer.h">
-      <Filter>Header Files\VK</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\glwindow.h">
       <Filter>Header Files\GL</Filter>
     </ClInclude>
@@ -98,14 +83,8 @@
     <ClInclude Include="..\..\..\src\kidsnow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\vkwindow.h">
-      <Filter>Header Files\VK</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\src\glcommon.h">
       <Filter>Header Files\GL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\vkcommon.h">
-      <Filter>Header Files\VK</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\src\camera.h">
       <Filter>Header Files</Filter>

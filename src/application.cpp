@@ -21,80 +21,83 @@ Application::~Application()
     LogInfo("Bye!");
 }
 
-bool Application::Initialize()
+bool Application::initialize()
 {
 	WindowFactory* windowFactory = new WindowFactory();
-	m_window = windowFactory->GetWindow(m_appName, m_posX, m_posY, m_width, m_height, SupportedAPI::OPENGL);
+	m_window = windowFactory->getWindow(m_appName, m_posX, m_posY, m_width, m_height, SupportedAPI::OPENGL);
 	if (m_window == nullptr)
 	{
 		return false;
 	}
 	delete windowFactory;
-	CHECKRESULT(m_window->Initialize());
+	CHECKRESULT(m_window->initialize());
 
-	m_renderer = m_window->GenerateRenderer();
+	m_window->makeCurrent();
+
+	m_renderer = m_window->generateRenderer();
 	if (m_renderer == nullptr)
 	{
 		return false;
 	}
-	CHECKRESULT(m_renderer->Initialize());
+	CHECKRESULT(m_renderer->initialize());
 
 	m_camera = new Camera();
-	m_camera->SetPosition(0.0f, 0.0f, 3.0f);
-	m_camera->SetRotation(0.0f, 0.0f, 0.0f);
-	m_camera->SetUp();
+	m_camera->setPosition(0.0f, 0.0f, 3.0f);
+	m_camera->setRotation(0.0f, 0.0f, 0.0f);
+	m_camera->setUp();
 
 	m_input = new Input();
-	m_input->Initialize();
+	m_input->initialize();
 
     return true;
 }
 
-void Application::CameraControl()
+void Application::cameraControl()
 {
-	if (m_input->IsKeyDown(KEYVALUE::KEY_W))
+	if (m_input->isKeyDown(KEYVALUE::KEY_W))
 	{
-		glm::vec4 pos = m_camera->GetPosition();
-		m_camera->SetPosition(pos.x, pos.y, pos.z - 0.1);
+		glm::vec4 pos = m_camera->getPosition();
+		m_camera->setPosition(pos.x, pos.y, pos.z - 0.1);
 	}
-	if (m_input->IsKeyDown(KEYVALUE::KEY_S))
+	if (m_input->isKeyDown(KEYVALUE::KEY_S))
 	{
-		glm::vec4 pos = m_camera->GetPosition();
-		m_camera->SetPosition(pos.x, pos.y, pos.z + 0.1);
+		glm::vec4 pos = m_camera->getPosition();
+		m_camera->setPosition(pos.x, pos.y, pos.z + 0.1);
 	}
-	if (m_input->IsKeyDown(KEYVALUE::KEY_A))
+	if (m_input->isKeyDown(KEYVALUE::KEY_A))
 	{
-		glm::vec4 pos = m_camera->GetPosition();
-		m_camera->SetPosition(pos.x - 0.1, pos.y, pos.z);
+		glm::vec4 pos = m_camera->getPosition();
+		m_camera->setPosition(pos.x - 0.1, pos.y, pos.z);
 	}
-	if (m_input->IsKeyDown(KEYVALUE::KEY_D))
+	if (m_input->isKeyDown(KEYVALUE::KEY_D))
 	{
-		glm::vec4 pos = m_camera->GetPosition();
-		m_camera->SetPosition(pos.x + 0.1, pos.y, pos.z);
+		glm::vec4 pos = m_camera->getPosition();
+		m_camera->setPosition(pos.x + 0.1, pos.y, pos.z);
 	}
-	if (m_input->IsKeyDown(KEYVALUE::KEY_Q))
+	if (m_input->isKeyDown(KEYVALUE::KEY_Q))
 	{
-		glm::vec4 pos = m_camera->GetPosition();
-		m_camera->SetPosition(pos.x, pos.y - 0.1, pos.z);
+		glm::vec4 pos = m_camera->getPosition();
+		m_camera->setPosition(pos.x, pos.y - 0.1, pos.z);
 	}
-	if (m_input->IsKeyDown(KEYVALUE::KEY_E))
+	if (m_input->isKeyDown(KEYVALUE::KEY_E))
 	{
-		glm::vec4 pos = m_camera->GetPosition();
-		m_camera->SetPosition(pos.x, pos.y + 0.1, pos.z);
+		glm::vec4 pos = m_camera->getPosition();
+		m_camera->setPosition(pos.x, pos.y + 0.1, pos.z);
 	}
-	m_camera->SetUp();
+	m_camera->setUp();
 }
 
-void Application::Run()
+void Application::run()
 {
     while (true)
     {
-        m_renderer->Render(m_camera);
-        m_window->Update(m_input);
+		m_window->makeCurrent();
+        m_renderer->render(m_camera);
+        m_window->update(m_input);
 
-		CameraControl();
+		cameraControl();
 
-		if (m_window->Finalize())
+		if (m_window->finalize())
 		{
 			return;
 		}

@@ -6,20 +6,17 @@
 
 namespace kidsnow {
 
-GLRenderer::GLRenderer(SDL_Window* window, SDL_GLContext context)
-	: Renderer(window), m_context(context) {}
+GLRenderer::GLRenderer() {}
 
 GLRenderer::~GLRenderer()
 {
 	delete m_shader;
 }
 
-bool GLRenderer::Initialize()
+bool GLRenderer::initialize()
 {
-	SDL_GL_MakeCurrent(m_window, m_context);
-
 	m_shader = new GLShader();
-	if (!m_shader->CompileRenderingShader("resource/simple.vert", "resource/simple.frag")) return false;
+	if (!m_shader->compileRenderingShader("resource/simple.vert", "resource/simple.frag")) return false;
 	
 	m_rectangleVertices = new GLfloat[30]
 	{
@@ -54,7 +51,7 @@ bool GLRenderer::Initialize()
 
 	// Initialize source texture.
 	int width, height;
-	unsigned char *data = LoadImageFile("resource/PolygonPlanet.png", width, height);
+	unsigned char *data = loadImageFile("resource/PolygonPlanet.png", width, height);
 	if (data)
 	{
 		glGenTextures(1, &m_texture);
@@ -73,12 +70,12 @@ bool GLRenderer::Initialize()
 		return false;
 	}
 
-	FreeImageBuffer(data);
+	freeImageBuffer(data);
 
 	return true;
 }
 
-void GLRenderer::Render(Camera* camera)
+void GLRenderer::render(Camera* camera)
 {
 	glClearColor(0.4f, 0.4f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -87,12 +84,17 @@ void GLRenderer::Render(Camera* camera)
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
-	m_shader->SetMatrix4("MVP", camera->GetViewProjectionMatrix());
+	m_shader->setMatrix4("MVP", camera->getViewProjectionMatrix());
 
-	m_shader->Use();
+	m_shader->use();
 
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	glFinish();
+}
+
+void GLRenderer::resize(int w, int h)
+{
+
 }
 
 } // end of kidsnow

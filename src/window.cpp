@@ -8,7 +8,7 @@ Window::Window(uint32_t graphicsAPI, std::string windowName, int posX, int posY,
 
 Window::~Window() {}
 
-bool Window::Initialize()
+bool Window::initialize()
 {
 	if (SDL_VideoInit(NULL) < 0)
 	{
@@ -48,7 +48,7 @@ bool Window::Initialize()
 	return true;
 }
 
-bool Window::Finalize()
+bool Window::finalize()
 {
 	if (!m_windowShouldClose)
 	{
@@ -60,7 +60,7 @@ bool Window::Finalize()
 	return true;
 }
 
-void Window::Update(Input* input)
+void Window::update(Input* input)
 {
 	SDL_Event event;
 	bool withControl = false;
@@ -86,15 +86,15 @@ void Window::Update(Input* input)
 
 			if (withControl)
 			{
-				input->KeyDown(KEYVALUE::SPECIAL_CONTROL);
+				input->keyDown(KEYVALUE::SPECIAL_CONTROL);
 			}
 			if (withShift)
 			{
-				input->KeyDown(KEYVALUE::SPECIAL_SHIFT);
+				input->keyDown(KEYVALUE::SPECIAL_SHIFT);
 			}
 			if (withAlt)
 			{
-				input->KeyDown(KEYVALUE::SPECIAL_ALT);
+				input->keyDown(KEYVALUE::SPECIAL_ALT);
 			}
 
 			switch (event.key.keysym.sym)
@@ -103,22 +103,22 @@ void Window::Update(Input* input)
 				m_windowShouldClose = true;
 				break;
 			case SDLK_w:
-				input->KeyDown(KEYVALUE::KEY_W);
+				input->keyDown(KEYVALUE::KEY_W);
 				break;
 			case SDLK_a:
-				input->KeyDown(KEYVALUE::KEY_A);
+				input->keyDown(KEYVALUE::KEY_A);
 				break;
 			case SDLK_s:
-				input->KeyDown(KEYVALUE::KEY_S);
+				input->keyDown(KEYVALUE::KEY_S);
 				break;
 			case SDLK_d:
-				input->KeyDown(KEYVALUE::KEY_D);
+				input->keyDown(KEYVALUE::KEY_D);
 				break;
 			case SDLK_q:
-				input->KeyDown(KEYVALUE::KEY_Q);
+				input->keyDown(KEYVALUE::KEY_Q);
 				break;
 			case SDLK_e:
-				input->KeyDown(KEYVALUE::KEY_E);
+				input->keyDown(KEYVALUE::KEY_E);
 				break;
 			}
 
@@ -130,15 +130,15 @@ void Window::Update(Input* input)
 
 			if (!withControl)
 			{
-				input->KeyUp(KEYVALUE::SPECIAL_CONTROL);
+				input->keyUp(KEYVALUE::SPECIAL_CONTROL);
 			}
 			if (!withShift)
 			{
-				input->KeyUp(KEYVALUE::SPECIAL_SHIFT);
+				input->keyUp(KEYVALUE::SPECIAL_SHIFT);
 			}
 			if (!withAlt)
 			{
-				input->KeyUp(KEYVALUE::SPECIAL_ALT);
+				input->keyUp(KEYVALUE::SPECIAL_ALT);
 			}
 
 			switch (event.key.keysym.sym)
@@ -147,22 +147,22 @@ void Window::Update(Input* input)
 				m_windowShouldClose = true;
 				break;
 			case SDLK_w:
-				input->KeyUp(KEYVALUE::KEY_W);
+				input->keyUp(KEYVALUE::KEY_W);
 				break;
 			case SDLK_a:
-				input->KeyUp(KEYVALUE::KEY_A);
+				input->keyUp(KEYVALUE::KEY_A);
 				break;
 			case SDLK_s:
-				input->KeyUp(KEYVALUE::KEY_S);
+				input->keyUp(KEYVALUE::KEY_S);
 				break;
 			case SDLK_d:
-				input->KeyUp(KEYVALUE::KEY_D);
+				input->keyUp(KEYVALUE::KEY_D);
 				break;
 			case SDLK_q:
-				input->KeyUp(KEYVALUE::KEY_Q);
+				input->keyUp(KEYVALUE::KEY_Q);
 				break;
 			case SDLK_e:
-				input->KeyUp(KEYVALUE::KEY_E);
+				input->keyUp(KEYVALUE::KEY_E);
 				break;
 			}
 

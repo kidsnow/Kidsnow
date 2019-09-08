@@ -14,18 +14,19 @@ public:
 	virtual ~Window();
 
 public:
-	virtual bool Initialize();
-	virtual void Update(Input*);
-	virtual bool Finalize();
-	virtual Renderer* GenerateRenderer() = 0;
+	virtual bool initialize();
+	virtual void makeCurrent() = 0;
+	virtual void update(Input*);
+	virtual bool finalize();
+	virtual Renderer* generateRenderer() = 0;
 
 protected:
-	virtual void Greetings() = 0;
+	virtual void greetings() = 0;
 
 public:
-	inline SDL_Window* GetNativeWindow() { return m_window; }
-	inline int GetWidowWidth() { return m_width; }
-	inline int GetWidowHeight() { return m_height; }
+	inline SDL_Window* getNativeWindow() { return m_window; }
+	inline int getWidowWidth() { return m_width; }
+	inline int getWidowHeight() { return m_height; }
 
 protected:
 	uint32_t m_graphicsAPI;

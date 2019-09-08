@@ -24,7 +24,7 @@ Camera::~Camera()
 }
 
 
-void Camera::SetPosition(float x, float y, float z)
+void Camera::setPosition(float x, float y, float z)
 {
 	m_positionX = x;
 	m_positionY = y;
@@ -33,7 +33,7 @@ void Camera::SetPosition(float x, float y, float z)
 }
 
 
-void Camera::SetRotation(float x, float y, float z)
+void Camera::setRotation(float x, float y, float z)
 {
 	m_rotationX = x;
 	m_rotationY = y;
@@ -42,19 +42,19 @@ void Camera::SetRotation(float x, float y, float z)
 }
 
 
-glm::vec4 Camera::GetPosition()
+glm::vec4 Camera::getPosition()
 {
 	return glm::vec4(m_positionX, m_positionY, m_positionZ, 1.0f);
 }
 
 
-glm::vec4 Camera::GetRotation()
+glm::vec4 Camera::getRotation()
 {
 	return glm::vec4(m_rotationX, m_rotationY, m_rotationZ, 1.0f);
 }
 
 
-void Camera::SetUp()
+void Camera::setUp()
 {
 	glm::vec4 up, position, lookAt;
 	float yaw, pitch, roll;
@@ -96,7 +96,7 @@ void Camera::SetUp()
 	return;
 }
 
-glm::mat4x4 Camera::GetViewProjectionMatrix()
+glm::mat4x4 Camera::getViewProjectionMatrix()
 {
 	return m_projectionMatrix * m_viewMatrix;
 }

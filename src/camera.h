@@ -12,14 +12,14 @@ public:
 	Camera(const Camera&);
 	~Camera();
 
-	void SetPosition(float, float, float);
-	void SetRotation(float, float, float);
+	void setPosition(float, float, float);
+	void setRotation(float, float, float);
 
-	glm::vec4 GetPosition();
-	glm::vec4 GetRotation();
+	glm::vec4 getPosition();
+	glm::vec4 getRotation();
 
-	void SetUp();
-	glm::mat4x4 GetViewProjectionMatrix();
+	void setUp();
+	glm::mat4x4 getViewProjectionMatrix();
 
 private:
 	float m_positionX, m_positionY, m_positionZ;

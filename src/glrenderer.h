@@ -10,15 +10,15 @@ class GLShader;
 class GLRenderer : public Renderer
 {
 public:
-	GLRenderer(SDL_Window*, SDL_GLContext);
+	GLRenderer();
 	~GLRenderer();
 
 public:
-	bool Initialize();
-	void Render(Camera* camera);
+	bool initialize();
+	void render(Camera* camera);
+	void resize(int w, int h);
 
 private:
-	SDL_GLContext m_context;
 	GLShader* m_shader;
 
 	GLfloat* m_rectangleVertices;

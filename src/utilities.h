@@ -60,7 +60,7 @@ namespace kidsnow {
 
 #endif
 
-unsigned char* LoadImageFile(const char* fileName, int& width, int& height);
-void FreeImageBuffer(unsigned char* data);
+unsigned char* loadImageFile(const char* fileName, int& width, int& height);
+void freeImageBuffer(unsigned char* data);
 
 }

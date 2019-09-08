@@ -12,7 +12,7 @@ public:
 	~WindowFactory() {};
 
 public:
-	Window* GetWindow(std::string, int, int, int, int, SupportedAPI);
+	Window* getWindow(std::string, int, int, int, int, SupportedAPI);
 };
 
 } // end of kidsnoaw

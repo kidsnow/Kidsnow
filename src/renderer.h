@@ -9,15 +9,13 @@ class Camera;
 
 class Renderer {
 public:
-	Renderer(SDL_Window* window) : m_window(window) {};
+	Renderer() {};
 	virtual ~Renderer() {};
 
 public:
-	virtual bool Initialize() = 0;
-    virtual void Render(Camera* camera) = 0;
-
-protected:
-	SDL_Window* m_window;
+	virtual bool initialize() = 0;
+    virtual void render(Camera* camera) = 0;
+	virtual void resize(int w, int h) = 0;
 };
 
 } // end of kidsnow
