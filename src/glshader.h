@@ -8,13 +8,12 @@ namespace kidsnow {
 class GLShader
 {
 public:
-	// State
-	GLuint ID;
 	// Constructor
 	GLShader() { }
 	// Sets the current shader as active
-	GLShader &use();
+	void	use();
 	// Compiles the shader from given source code
+	const	GLchar* readShader(const char *fileName);
 	bool    compileRenderingShader(const char *vsFileName, const char *psFileName, const char *gsFileName = nullptr); // Note: geometry source code is optional 
 	bool	compileComputingShader(const char *csFileName);
 	// Utility functions
@@ -28,6 +27,8 @@ public:
 	void    setVector4f(const GLchar *name, const glm::vec4 &value, GLboolean useShader = false);
 	void    setMatrix4(const GLchar *name, const glm::mat4 &matrix, GLboolean useShader = false);
 private:
+	// State
+	GLuint	m_id;
 	// Checks if compilation or linking failed and if so, print the error logs
 	bool    checkCompileErrors(GLuint object, std::string type);
 };
