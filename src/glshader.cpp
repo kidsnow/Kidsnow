@@ -1,6 +1,8 @@
 #include "glshader.h"
 #include "utilities.h"
 
+#include <sstream>
+#include <fstream>
 #include <iostream>
 #include "glm/gtc/type_ptr.hpp"
 
@@ -11,23 +13,52 @@ void GLShader::use()
 	glUseProgram(this->m_id);
 }
 
-const GLchar* GLShader::readShader(const char* fileName) {
-	FILE* infile = fopen(fileName, "rb");
-	if (!infile) {
-		std::cerr << "Unable to open file '" << fileName << "'" << std::endl;
-		return NULL;
+//const GLchar* GLShader::readShader(const char* fileName)
+//{
+//	FILE* infile = fopen(fileName, "rb");
+//	if (!infile) {
+//		std::cerr << "Unable to open file '" << fileName << "'" << std::endl;
+//		return NULL;
+//	}
+//
+//	fseek(infile, 0, SEEK_END);
+//	int len = ftell(infile);
+//	fseek(infile, 0, SEEK_SET);
+//
+//	GLchar* source = (GLchar*)malloc((len + 1) * sizeof(GLchar));
+//
+//	fread(source, 1, len, infile);
+//	fclose(infile);
+//
+//	source[len] = 0;
+//
+//	return source;
+//}
+const GLchar* GLShader::readShader(const char* fileName)
+{
+	std::string shaderCode;
+	std::ifstream shaderFile;
+	shaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+	try
+	{
+		// open files
+		shaderFile.open(fileName);
+		std::stringstream vShaderStream;
+		// read file's buffer contents into streams
+		vShaderStream << shaderFile.rdbuf();
+		// close file handlers
+		shaderFile.close();
+		// convert stream into string
+		shaderCode = vShaderStream.str();
+	}
+	catch (std::ifstream::failure e)
+	{
+		std::cerr << "ERROR::SHADER::File not successfully read" << std::endl;
+		return nullptr;
 	}
 
-	fseek(infile, 0, SEEK_END);
-	int len = ftell(infile);
-	fseek(infile, 0, SEEK_SET);
-
-	GLchar* source = (GLchar*)malloc((len + 1) * sizeof(GLchar));
-
-	fread(source, 1, len, infile);
-	fclose(infile);
-
-	source[len] = 0;
+	GLchar* source = new GLchar[strlen(shaderCode.c_str()) + 1];
+	strcpy(source, shaderCode.c_str());
 
 	return source;
 }
@@ -86,11 +117,11 @@ bool GLShader::compileRenderingShader(const char* vsFileName, const char* psFile
 		glDeleteShader(geometryShader);
 
 	if (vertexSource != nullptr)
-		delete vertexSource;
+		delete[] vertexSource;
 	if (fragmentSource != nullptr)
-		delete fragmentSource;
+		delete[] fragmentSource;
 	if (geometrySource != nullptr)
-		delete geometrySource;
+		delete[] geometrySource;
 
 	return true;
 }

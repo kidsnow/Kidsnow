@@ -4,6 +4,10 @@
 #include "glshader.h"
 #include "camera.h"
 
+
+#include "wavefrontparser.h"
+#include "mesh.h"
+
 namespace kidsnow {
 
 GLRenderer::GLRenderer() {}
@@ -15,6 +19,10 @@ GLRenderer::~GLRenderer()
 
 bool GLRenderer::initialize()
 {
+	WavefrontParser *parser = new WavefrontParser();
+	Mesh *mesh = new Mesh();
+	parser->parse("resource/rectangle.obj", mesh);
+
 	m_shader = new GLShader();
 	if (!m_shader->compileRenderingShader("resource/simple.vert", "resource/simple.frag")) return false;
 	

@@ -47,7 +47,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\..\src\mesh.cpp" />
+    <ClCompile Include="..\..\..\src\scene.cpp" />
+    <ClCompile Include="..\..\..\src\scenenode.cpp" />
     <ClCompile Include="..\..\..\src\utilities.cpp" />
+    <ClCompile Include="..\..\..\src\wavefrontparser.cpp" />
     <ClCompile Include="..\..\..\src\window.cpp" />
     <ClCompile Include="..\..\..\src\windowfactory.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -64,15 +68,34 @@
     <ClInclude Include="..\..\..\src\glwindow.h" />
     <ClInclude Include="..\..\..\src\input.h" />
     <ClInclude Include="..\..\..\src\kidsnow.h" />
+    <ClInclude Include="..\..\..\src\mesh.h" />
+    <ClInclude Include="..\..\..\src\parser.h" />
+    <ClInclude Include="..\..\..\src\scene.h" />
+    <ClInclude Include="..\..\..\src\scenenode.h" />
     <ClInclude Include="..\..\..\src\utilities.h" />
     <ClInclude Include="..\..\..\src\renderer.h" />
     <ClInclude Include="..\..\..\src\glshader.h" />
+    <ClInclude Include="..\..\..\src\wavefrontparser.h" />
     <ClInclude Include="..\..\..\src\window.h" />
     <ClInclude Include="..\..\..\src\windowfactory.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\src\resource\simple.frag" />
     <None Include="..\..\..\src\resource\simple.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="..\..\..\src\resource\box.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Object>
+    <Object Include="..\..\..\src\resource\rectangle.obj">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Object>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
