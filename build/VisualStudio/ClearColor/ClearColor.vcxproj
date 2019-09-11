@@ -80,10 +80,6 @@
     <ClInclude Include="..\..\..\src\windowfactory.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\src\resource\simple.frag" />
-    <None Include="..\..\..\src\resource\simple.vert" />
-  </ItemGroup>
-  <ItemGroup>
     <Object Include="..\..\..\src\resource\box.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -96,6 +92,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\resource\simple.frag" />
+    <None Include="..\..\..\src\resource\simple.vert" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

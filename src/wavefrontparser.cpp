@@ -83,21 +83,31 @@ Mesh* WavefrontParser::parse(const char* fileName, Mesh* mesh)
 		else if (strequal(current_token, "f")) // Face
 		{
 			char* token;
-			char* str;
-			while ((token = strtok(nullptr, WHITESPACE)) != nullptr)
-			{
-				
-				if (contains(token, "//")) // Position//Normal
-				{
-					str = strchr(token, '/');
-				}
-				else if (contains(token, "/")) // Position/Texture
-				{
-					if (contains(str, "/")) // Position/Texture/Normal
-					{
+			char* tokentoken;
+			glm::vec3 pos, tex, nor;
+			int curidx = 0;
+			
+			// - When # of points accumulated is more than 2,
+			//     generate face for every incoming index.
+			// - If there's more than 3 points, faces are accumulated like this...
+			//     1 2 3, 1 3 4, 1 4 5, 1 5 6, ...
 
-					}
-				}
+			token = strtok(nullptr, WHITESPACE);
+			INDEX_TYPE indextype = checkIndexType(token);
+			switch (indextype)
+			{
+			case INDEX_TYPE::P:
+				parseface_P(token, mesh);
+				break;
+			case INDEX_TYPE::PT:
+				parseface_PT(token, mesh);
+				break;
+			case INDEX_TYPE::PN:
+				parseface_PN(token, mesh);
+				break;
+			case INDEX_TYPE::PTN:
+				parseface_PTN(token, mesh);
+				break;
 			}
 		}
 
@@ -113,18 +123,108 @@ Mesh* WavefrontParser::parse(const char* fileName, Mesh* mesh)
 	}
 }
 
-int WavefrontParser::strequal(const char *s1, const char *s2)
+void WavefrontParser::parseface_P(char *token, Mesh *mesh)
 {
-	if (strcmp(s1, s2) == 0)
-		return 1;
-	return 0;
+	int curidx = 0;
+	int firstP = atoi(token);
+	int recentP[2];
+
+	while ((token = strtok(nullptr, WHITESPACE)) != nullptr)
+	{
+		curidx++;
+		recentP[PREV] = recentP[CUR];
+		recentP[CUR] = atoi(token);
+		if (curidx > 1)
+			mesh->addPositionToFace(glm::uvec3(firstP, recentP[PREV], recentP[CUR]));
+	}
 }
 
-int WavefrontParser::contains(const char *haystack, const char *needle)
+void WavefrontParser::parseface_PT(char *token, Mesh *mesh)
 {
-	if (strstr(haystack, needle) == nullptr)
-		return 0;
-	return 1;
+	int curidx = 0;
+	int firstP = atoi(token);
+	const char *tokentoken = strchr(token, '/') + 1;
+	int firstT = atoi(tokentoken);
+	int recentP[2], recentT[2];
+
+	while ((token = strtok(nullptr, WHITESPACE)) != nullptr)
+	{
+		curidx++;
+
+		recentP[PREV] = recentP[CUR];
+		recentP[CUR] = atoi(token);
+
+		tokentoken = strchr(token, '/') + 1;
+		recentT[PREV] = recentT[CUR];
+		recentT[CUR] = atoi(tokentoken);
+
+		if (curidx > 1)
+		{
+			mesh->addPositionToFace(glm::uvec3(firstP, recentP[PREV], recentP[CUR]));
+			mesh->addTextureToFace(glm::uvec3(firstT, recentT[PREV], recentT[CUR]));
+		}
+	}
+}
+
+void WavefrontParser::parseface_PN(char *token, Mesh *mesh)
+{
+	int curidx = 0;
+	int firstP = atoi(token);
+	const char *tokentoken = strchr(token, '/') + 2;
+	int firstN = atoi(tokentoken);
+	int recentP[2], recentN[2];
+
+	while ((token = strtok(nullptr, WHITESPACE)) != nullptr)
+	{
+		curidx++;
+
+		recentP[PREV] = recentP[CUR];
+		recentP[CUR] = atoi(token);
+
+		tokentoken = strchr(token, '/') + 2;
+		recentN[PREV] = recentN[CUR];
+		recentN[CUR] = atoi(tokentoken);
+
+		if (curidx > 1)
+		{
+			mesh->addPositionToFace(glm::uvec3(firstP, recentP[PREV], recentP[CUR]));
+			mesh->addNormalToFace(glm::uvec3(firstN, recentN[PREV], recentN[CUR]));
+		}
+	}
+}
+
+void WavefrontParser::parseface_PTN(char *token, Mesh *mesh)
+{
+	int curidx = 0;
+	int firstP = atoi(token);
+	const char *tokentoken = strchr(token, '/') + 1;
+	int firstT = atoi(tokentoken);
+	tokentoken = strchr(tokentoken, '/') + 1;
+	int firstN = atoi(tokentoken);
+	int recentP[2], recentT[2], recentN[2];
+
+	while ((token = strtok(nullptr, WHITESPACE)) != nullptr)
+	{
+		curidx++;
+
+		recentP[PREV] = recentP[CUR];
+		recentP[CUR] = atoi(token);
+
+		tokentoken = strchr(token, '/') + 1;
+		recentT[PREV] = recentT[CUR];
+		recentT[CUR] = atoi(tokentoken);
+
+		tokentoken = strchr(tokentoken, '/') + 1;
+		recentN[PREV] = recentN[CUR];
+		recentN[CUR] = atoi(tokentoken);
+
+		if (curidx > 1)
+		{
+			mesh->addPositionToFace(glm::uvec3(firstP, recentP[PREV], recentP[CUR]));
+			mesh->addTextureToFace(glm::uvec3(firstT, recentT[PREV], recentT[CUR]));
+			mesh->addNormalToFace(glm::uvec3(firstN, recentN[PREV], recentN[CUR]));
+		}
+	}
 }
 
 }

@@ -121,19 +121,19 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\src\resource\simple.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="..\..\..\src\resource\simple.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Object Include="..\..\..\src\resource\box.obj">
       <Filter>Resource Files</Filter>
     </Object>
     <Object Include="..\..\..\src\resource\rectangle.obj">
       <Filter>Resource Files</Filter>
     </Object>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\src\resource\simple.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\src\resource\simple.vert">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -33,7 +33,7 @@ public:
 	inline void addTexture(glm::vec3 texture) { m_texture.push_back(texture); }
 	inline void addNormal(glm::vec3 normal) { m_normal.push_back(normal); }
 	inline void addPositionToFace(glm::uvec3 position) { m_pFaces.push_back(position); }
-	inline void addTexureToFace(glm::uvec3 texture) { m_tFaces.push_back(texture); }
+	inline void addTextureToFace(glm::uvec3 texture) { m_tFaces.push_back(texture); }
 	inline void addNormalToFace(glm::uvec3 normal) { m_nFaces.push_back(normal); }
 	inline void addPositionToLine(glm::uvec2 position) { m_pLines.push_back(position); }
 	inline void addTexureToLine(glm::uvec2 texture) { m_tLines.push_back(texture); }
