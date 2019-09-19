@@ -9,7 +9,7 @@ public:
 	Parser() {}
 
 public:
-	virtual Mesh* parse(const char* fileName, Mesh* mesh) = 0;
+	virtual Mesh* Parse(const char* fileName, Mesh* mesh) = 0;
 
 protected:
 	static constexpr unsigned int OBJ_LINE_SIZE = 1000;

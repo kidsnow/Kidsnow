@@ -3,6 +3,8 @@ CMakeFiles/
 Makefile
 *.cmake
 
+.ycm_extra_conf.py
+
 bin/
 glslangValidator.exe
 

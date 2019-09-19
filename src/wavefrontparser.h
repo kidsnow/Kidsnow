@@ -19,18 +19,18 @@ public:
 	WavefrontParser() {}
 
 public:
-	virtual Mesh* parse(const char *fileName, Mesh *mesh);
+	virtual Mesh* Parse(const char *fileName, Mesh *mesh);
 
 private:
 	static constexpr unsigned int PREV = 0;
 	static constexpr unsigned int CUR = 1;
-	void parseface_P(char *token, Mesh *mesh);
-	void parseface_PT(char *token, Mesh *mesh);
-	void parseface_PN(char *token, Mesh *mesh);
-	void parseface_PTN(char *token, Mesh *mesh);
+	void Parseface_P(char *token, Mesh *mesh);
+	void Parseface_PT(char *token, Mesh *mesh);
+	void Parseface_PN(char *token, Mesh *mesh);
+	void Parseface_PTN(char *token, Mesh *mesh);
 
 private:
-	inline INDEX_TYPE checkIndexType(const char* token)
+	inline INDEX_TYPE CheckIndexType(const char* token)
 	{
 		const char *tokentoken;
 

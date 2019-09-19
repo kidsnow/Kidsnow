@@ -14,9 +14,9 @@ public:
 	~GLRenderer();
 
 public:
-	bool initialize();
-	void render(Camera* camera);
-	void resize(int w, int h);
+	bool Initialize();
+	void Render(Camera* camera);
+	void Resize(int w, int h);
 
 private:
 	GLShader* m_shader;

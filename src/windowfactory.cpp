@@ -5,7 +5,7 @@
 
 namespace kidsnow {
 
-Window* WindowFactory::getWindow(std::string windowName, int posX, int posY, int width, int height, SupportedAPI graphicsAPI)
+Window* WindowFactory::GetWindow(std::string windowName, int posX, int posY, int width, int height, SupportedAPI graphicsAPI)
 {
 	if (graphicsAPI == SupportedAPI::OPENGL)
 		return new GLWindow(windowName, posX, posY, width, height);

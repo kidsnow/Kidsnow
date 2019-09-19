@@ -12,13 +12,13 @@ public:
 	~GLWindow();
 
 public:
-	virtual bool initialize();
-	virtual void makeCurrent();
-	virtual bool finalize();
-	virtual Renderer* generateRenderer();
+	virtual bool Initialize();
+	virtual void MakeCurrent();
+	virtual bool Finalize();
+	virtual Renderer* GenerateRenderer();
 
 private:
-	virtual void greetings();
+	virtual void Greetings();
 
 private:
 	SDL_GLContext m_context;

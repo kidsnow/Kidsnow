@@ -15,9 +15,9 @@ public:
     ~Application();
 
 public:
-    bool initialize();
-	void cameraControl();
-    void run();
+    bool Initialize();
+	void CameraControl();
+    void Run();
 
 private:
 	std::string m_appName;

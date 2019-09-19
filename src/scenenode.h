@@ -14,7 +14,7 @@ public:
 	SceneNode();
 	
 public:
-	inline void setMesh(Mesh *mesh) { m_mesh = mesh; }
+	inline void SetMesh(Mesh *mesh) { m_mesh = mesh; }
 
 private:
 	SceneNode *m_parent, *m_child;

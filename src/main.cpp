@@ -4,10 +4,10 @@ int main(void)
 {
     kidsnow::Application* app = new kidsnow::Application("Hello", 100, 100, 1440, 810);
 	
-	if (!app->initialize())
+	if (!app->Initialize())
 		return 0;
 
-    app->run();
+    app->Run();
     
 	delete app;
 

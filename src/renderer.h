@@ -13,9 +13,9 @@ public:
 	virtual ~Renderer() {};
 
 public:
-	virtual bool initialize() = 0;
-    virtual void render(Camera* camera) = 0;
-	virtual void resize(int w, int h) = 0;
+	virtual bool Initialize() = 0;
+    virtual void Render(Camera* camera) = 0;
+	virtual void Resize(int w, int h) = 0;
 };
 
 } // end of kidsnow

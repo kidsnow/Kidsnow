@@ -17,14 +17,14 @@ GLRenderer::~GLRenderer()
 	delete m_shader;
 }
 
-bool GLRenderer::initialize()
+bool GLRenderer::Initialize()
 {
 	WavefrontParser *parser = new WavefrontParser();
 	Mesh *mesh = new Mesh();
-	parser->parse("resource/rectangle.obj", mesh);
+	parser->Parse("resource/rectangle.obj", mesh);
 
 	m_shader = new GLShader();
-	if (!m_shader->compileRenderingShader("resource/simple.vert", "resource/simple.frag")) return false;
+	if (!m_shader->CompileRenderingShader("resource/simple.vert", "resource/simple.frag")) return false;
 	
 	m_rectangleVertices = new GLfloat[30]
 	{
@@ -59,7 +59,7 @@ bool GLRenderer::initialize()
 
 	// Initialize source texture.
 	int width, height;
-	unsigned char *data = loadImageFile("resource/PolygonPlanet.png", width, height);
+	unsigned char *data = LoadImageFile("resource/PolygonPlanet.png", width, height);
 	if (data)
 	{
 		glGenTextures(1, &m_texture);
@@ -78,12 +78,12 @@ bool GLRenderer::initialize()
 		return false;
 	}
 
-	freeImageBuffer(data);
+	FreeImageBuffer(data);
 
 	return true;
 }
 
-void GLRenderer::render(Camera* camera)
+void GLRenderer::Render(Camera* camera)
 {
 	glClearColor(0.4f, 0.4f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -92,15 +92,15 @@ void GLRenderer::render(Camera* camera)
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
-	m_shader->setMatrix4("MVP", camera->getViewProjectionMatrix());
+	m_shader->SetMatrix4("MVP", camera->GetViewProjectionMatrix());
 
-	m_shader->use();
+	m_shader->Use();
 
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	glFinish();
 }
 
-void GLRenderer::resize(int w, int h)
+void GLRenderer::Resize(int w, int h)
 {
 
 }

@@ -12,9 +12,9 @@ GLWindow::GLWindow(std::string windowName, int posX, int posY, int width, int he
 
 GLWindow::~GLWindow() {}
 
-bool GLWindow::initialize()
+bool GLWindow::Initialize()
 {
-	if (Window::initialize())
+	if (Window::Initialize())
 	{
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
@@ -34,7 +34,7 @@ bool GLWindow::initialize()
 			LogDebug("Failed to initialize GLAD.");
 			return false;
 		}
-		greetings();
+		Greetings();
 
 		SDL_GL_MakeCurrent(m_window, NULL);
 
@@ -44,14 +44,14 @@ bool GLWindow::initialize()
 	return false;
 }
 
-void GLWindow::makeCurrent()
+void GLWindow::MakeCurrent()
 {
 	SDL_GL_MakeCurrent(m_window, m_context);
 }
 
-bool GLWindow::finalize()
+bool GLWindow::Finalize()
 {
-	if (!Window::finalize())
+	if (!Window::Finalize())
 	{
 		return false;
 	}
@@ -60,7 +60,7 @@ bool GLWindow::finalize()
 	return true;
 }
 
-void GLWindow::greetings()
+void GLWindow::Greetings()
 {
 	LogInfo(glGetString(GL_VENDOR));
 	LogInfo(glGetString(GL_RENDERER));
@@ -69,7 +69,7 @@ void GLWindow::greetings()
 	return;
 }
 
-Renderer* GLWindow::generateRenderer()
+Renderer* GLWindow::GenerateRenderer()
 {
 	GLRenderer* renderer = new GLRenderer();
 	

@@ -7,7 +7,7 @@
 
 namespace kidsnow {
 
-Mesh* WavefrontParser::parse(const char* fileName, Mesh* mesh)
+Mesh* WavefrontParser::Parse(const char* fileName, Mesh* mesh)
 {
 	FILE* obj_file_stream;
 	int current_material = -1;
@@ -47,7 +47,7 @@ Mesh* WavefrontParser::parse(const char* fileName, Mesh* mesh)
 			else
 				w = 1.0f;
 			glm::vec4 position(x, y, z, w);
-			mesh->addPosition(position);
+			mesh->AddPosition(position);
 		}
 
 		else if (strequal(current_token, "vt")) // Texture
@@ -67,7 +67,7 @@ Mesh* WavefrontParser::parse(const char* fileName, Mesh* mesh)
 			else
 				w = 0.0f;
 			glm::vec3 texture(u, v, w);
-			mesh->addTexture(texture);
+			mesh->AddTexture(texture);
 		}
 
 		else if (strequal(current_token, "vn")) // Normal
@@ -77,7 +77,7 @@ Mesh* WavefrontParser::parse(const char* fileName, Mesh* mesh)
 			j = atof(strtok(nullptr, WHITESPACE));
 			k = atof(strtok(nullptr, WHITESPACE));
 			glm::vec3 normal(i, j, k);
-			mesh->addNormal(normal);
+			mesh->AddNormal(normal);
 		}
 
 		else if (strequal(current_token, "f")) // Face
@@ -93,20 +93,20 @@ Mesh* WavefrontParser::parse(const char* fileName, Mesh* mesh)
 			//     1 2 3, 1 3 4, 1 4 5, 1 5 6, ...
 
 			token = strtok(nullptr, WHITESPACE);
-			INDEX_TYPE indextype = checkIndexType(token);
+			INDEX_TYPE indextype = CheckIndexType(token);
 			switch (indextype)
 			{
 			case INDEX_TYPE::P:
-				parseface_P(token, mesh);
+				Parseface_P(token, mesh);
 				break;
 			case INDEX_TYPE::PT:
-				parseface_PT(token, mesh);
+				Parseface_PT(token, mesh);
 				break;
 			case INDEX_TYPE::PN:
-				parseface_PN(token, mesh);
+				Parseface_PN(token, mesh);
 				break;
 			case INDEX_TYPE::PTN:
-				parseface_PTN(token, mesh);
+				Parseface_PTN(token, mesh);
 				break;
 			}
 		}
@@ -123,7 +123,7 @@ Mesh* WavefrontParser::parse(const char* fileName, Mesh* mesh)
 	}
 }
 
-void WavefrontParser::parseface_P(char *token, Mesh *mesh)
+void WavefrontParser::Parseface_P(char *token, Mesh *mesh)
 {
 	int curidx = 0;
 	int firstP = atoi(token);
@@ -135,11 +135,11 @@ void WavefrontParser::parseface_P(char *token, Mesh *mesh)
 		recentP[PREV] = recentP[CUR];
 		recentP[CUR] = atoi(token);
 		if (curidx > 1)
-			mesh->addPositionToFace(glm::uvec3(firstP, recentP[PREV], recentP[CUR]));
+			mesh->AddPositionToFace(glm::uvec3(firstP, recentP[PREV], recentP[CUR]));
 	}
 }
 
-void WavefrontParser::parseface_PT(char *token, Mesh *mesh)
+void WavefrontParser::Parseface_PT(char *token, Mesh *mesh)
 {
 	int curidx = 0;
 	int firstP = atoi(token);
@@ -160,13 +160,13 @@ void WavefrontParser::parseface_PT(char *token, Mesh *mesh)
 
 		if (curidx > 1)
 		{
-			mesh->addPositionToFace(glm::uvec3(firstP, recentP[PREV], recentP[CUR]));
-			mesh->addTextureToFace(glm::uvec3(firstT, recentT[PREV], recentT[CUR]));
+			mesh->AddPositionToFace(glm::uvec3(firstP, recentP[PREV], recentP[CUR]));
+			mesh->AddTextureToFace(glm::uvec3(firstT, recentT[PREV], recentT[CUR]));
 		}
 	}
 }
 
-void WavefrontParser::parseface_PN(char *token, Mesh *mesh)
+void WavefrontParser::Parseface_PN(char *token, Mesh *mesh)
 {
 	int curidx = 0;
 	int firstP = atoi(token);
@@ -187,13 +187,13 @@ void WavefrontParser::parseface_PN(char *token, Mesh *mesh)
 
 		if (curidx > 1)
 		{
-			mesh->addPositionToFace(glm::uvec3(firstP, recentP[PREV], recentP[CUR]));
-			mesh->addNormalToFace(glm::uvec3(firstN, recentN[PREV], recentN[CUR]));
+			mesh->AddPositionToFace(glm::uvec3(firstP, recentP[PREV], recentP[CUR]));
+			mesh->AddNormalToFace(glm::uvec3(firstN, recentN[PREV], recentN[CUR]));
 		}
 	}
 }
 
-void WavefrontParser::parseface_PTN(char *token, Mesh *mesh)
+void WavefrontParser::Parseface_PTN(char *token, Mesh *mesh)
 {
 	int curidx = 0;
 	int firstP = atoi(token);
@@ -220,9 +220,9 @@ void WavefrontParser::parseface_PTN(char *token, Mesh *mesh)
 
 		if (curidx > 1)
 		{
-			mesh->addPositionToFace(glm::uvec3(firstP, recentP[PREV], recentP[CUR]));
-			mesh->addTextureToFace(glm::uvec3(firstT, recentT[PREV], recentT[CUR]));
-			mesh->addNormalToFace(glm::uvec3(firstN, recentN[PREV], recentN[CUR]));
+			mesh->AddPositionToFace(glm::uvec3(firstP, recentP[PREV], recentP[CUR]));
+			mesh->AddTextureToFace(glm::uvec3(firstT, recentT[PREV], recentT[CUR]));
+			mesh->AddNormalToFace(glm::uvec3(firstN, recentN[PREV], recentN[CUR]));
 		}
 	}
 }

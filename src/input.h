@@ -52,12 +52,12 @@ public:
 	Input(const Input&);
 	~Input();
 
-	void initialize();
+	void Initialize();
 
-	void keyDown(KEYVALUE);
-	void keyUp(KEYVALUE);
+	void KeyDown(KEYVALUE);
+	void KeyUp(KEYVALUE);
 
-	bool isKeyDown(KEYVALUE);
+	bool IsKeyDown(KEYVALUE);
 
 private:
 	bool m_keys[256];
